@@ -62,6 +62,7 @@ return array(
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
+			//'enableProfiling'=>true,
 		),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -82,10 +83,10 @@ return array(
 				*/
 			),
 		),
-		'request'=>array(
+		/*'request'=>array(
             'enableCsrfValidation'	=> true,
             'enableCookieValidation'=> true,
-        ),
+        ),*/
         'mail' => array(
             'class' => 'ext.yii-mail.YiiMail',
             'transportType'=>'smtp',
@@ -96,7 +97,7 @@ return array(
                     'port'=>'25',                       
             ),
             'viewPath' => 'application.views.mail',             
-    ),
+    	),
 	),
 
 
