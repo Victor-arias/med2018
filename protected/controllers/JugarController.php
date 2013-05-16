@@ -5,10 +5,12 @@ class JugarController extends Controller
 	public $layout 		= '//layouts/column2';
 	/*private $_sal		= 'joj2018';
 	private $_token 	= 0;*/
+	private $_prexnivel = 4;
 	private $_ronda 	= 0;
-	private $_pregunta  = 0;
+	private $_preguntan = 0;
+	private $_preguntaid= 0;
 	private $_nivel  	= 0;
-
+	private $_situacion = 0;
 
 	/**
 	 * @return array action filters
@@ -32,7 +34,7 @@ class JugarController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('jugar', 'cargarpregunta', 'responder', 'control'),
+				'actions'=>array('jugar', 'cargarpregunta', 'responder', 'control', 'test'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -41,50 +43,45 @@ class JugarController extends Controller
 		);
 	}
 
+	public function actionTest()
+	{
+		
+	}
 
 	public function actionJugar()
 	{
-		/*//1. Verifico la sesión para inicializar el juego
-		if( !isset(Yii::app()->session['ronda']) )
-		{
-			$ronda = new Ronda;
-			
-			Yii::app()->session['ronda'] 	= $this->_ronda 	= $ronda->setRonda( Yii::app()->user->id );
-			Yii::app()->session['pregunta'] = $this->_pregunta 	= 1;
-			Yii::app()->session['nivel'] 	= $this->_nivel 	= 1;
-		}else
-		{
-			$this->_ronda  	 = Yii::app()->session['ronda'];
-			$this->_pregunta = Yii::app()->session['pregunta'];
-			$this->_nivel 	 = Yii::app()->session['nivel'];
-		}*/
+		$this->verificar_sesion();
 
 		$this->render('jugar');
 	}
 
 	public function actionCargarPregunta()
 	{
-		if( !isset(Yii::app()->session['ronda']) ) throw new CHttpException('403', 'Forbidden access.');
+		$this->verificar_sesion();
 		if (!Yii::app()->request->isAjaxRequest) throw new CHttpException('403', 'Forbidden access.');
-	    if( !isset($_POST['p']) && !isset($_POST['n']) ) throw new CHttpException('403', 'Forbidden access.');
 	    
-	    $pregunta 	= $_POST['p'];
-	    $nivel  	= $_POST['n'];
+	    if( $this->_situacion == 2 )
+	    {
+	    	$resultado = $this->cargar_pregunta($this->_preguntaid);
+	    }
+	    else
+	    {
+		    $resultado = $this->cargar_pregunta();
+		    Yii::app()->session['situacion'] = $this->_situacion = 2; //2. pregunta  
+		    Yii::app()->session['preguntan'] = $this->_preguntan = ($this->_preguntan + 1); 
+		    Yii::app()->session['preguntaid']= $this->_preguntaid= $resultado['pregunta']->id;
+		}
 
-	    $this->_pregunta = $pregunta;
-	    $this->_nivel 	= $nivel;
-
-	    header('Content-Type: application/json; charset="UTF-8"');
-	    echo CJSON::encode( $this->cargar_pregunta() );
+		header('Content-Type: application/json; charset="UTF-8"');
+		echo CJSON::encode( $resultado );
 	    Yii::app()->end();
 	
 	}
 
 	public function actionControl()
 	{
-		$respuesta = array( 'n' => $this->_nivel,
-							'p' => $this->_pregunta,
-						);
+		$this->verificar_sesion();
+		$respuesta = array( 's' => $this->_situacion);
 		header('Content-Type: application/json; charset="UTF-8"');
 	    echo CJSON::encode( $respuesta );
 	    Yii::app()->end();
@@ -92,51 +89,67 @@ class JugarController extends Controller
 
 	public function actionResponder()
 	{
-		if( !isset(Yii::app()->session['ronda']) ) throw new CHttpException('403', 'Forbidden access.');
+		$this->verificar_sesion();
 		if (!Yii::app()->request->isAjaxRequest) throw new CHttpException('403', 'Forbidden access.');
-		if( !isset($_POST['r']) && !isset($_POST['p']) && !isset($_POST['n']) ) throw new CHttpException('403', 'Forbidden access.');
+		if( !isset($_POST['r']) && !is_int($_POST['r']) ) throw new CHttpException('403', 'Forbidden access.');
 	    
 		$respuesta 	= $_POST['r'];
-	    $pregunta 	= $_POST['p'];
-	    $nivel  	= $_POST['n'];
-
+	    
 	    $r = Respuesta::model()->findByPk($respuesta);
 	    
 	    if($r->es_correcta)
 	    {
-	    	//Sumar puntos a la ronda
-	    	//Sumar tiempo a la ronda
-	    	//Sumar preguntas a la ronda
-	    	//Actualizar nivel a la ronda
-	    	$ronda = new Ronda;
-	    	$ronda->id 			= $this->_ronda;
-	    	$ronda->puntos		= 10;
-	    	$ronda->tiempo		= 10;
-	    	$ronda->preguntas 	= 1;
-	    	$ronda->nivel		= 1;
-	    	$ronda->update();
+	    	
+	    	$nivel = Nivel::model()->findByPk($this->_nivel);
+	    	$ronda = Ronda::model()->findByPk($this->_ronda);
+	    	$a = array(
+					'tiempo' 	=> ($ronda->tiempo + $nivel->tiempo), 
+					'preguntas' => $this->_preguntan, 
+					'nivel' 	=> $this->_nivel, 
+					'puntos' 	=> ($ronda->puntos + $nivel->puntos),
+				);
+	    	    	
+	    	$ronda->updateByPk($this->_ronda, $a);
 
 	    	//Agregar la pregunta a pregunta_x_ronda
 	    	$pxr = new PreguntaXRonda;
 	    	$pxr->ronda_id 		= $this->_ronda;
-	    	$pxr->pregunta_id 	= $r->pregunta_id;
+	    	$pxr->pregunta_id 	= $this->_preguntaid;
 	    	$pxr->save();
 
-	    	$respuesta = 2;
+	    	Yii::app()->session['preguntaid'] = $this->_preguntaid = 0;
+
+	    	if( $this->_preguntan < ($this->_prexnivel * $this->_nivel) )
+	    	{
+	    		$tmpsituacion = 3; //3. Respuesta correcta
+	    	}
+	    	else
+	    	{
+	    		if($this->_nivel < 5){
+	    			$tmpsituacion = 5; //5. Cambio de nivel	
+	    			Yii::app()->session['nivel'] = $this->_nivel = $this->_nivel+1;
+	    		}else{
+	    			$tmpsituacion = 6; //6. Ronda completada
+	    		}
+	    			
+	    	}
+	    	Yii::app()->session['situacion'] = $this->_situacion = $tmpsituacion; 
 	    	
+	    	$situacion = $tmpsituacion;
 	    }
 	    else
 	    {
-	    	$respuesta = 1;
+	    	Yii::app()->session['situacion'] = $this->_situacion = 4; //4. Respuesta mala
+	    	$situacion = 4;
 	    }
 
 	    header('Content-Type: application/json; charset="UTF-8"');
-	    echo CJSON::encode( array('response' => $respuesta) );
+	    echo CJSON::encode( array('s' => $situacion) );
 	    Yii::app()->end();
 
 	}
 
-	protected function cargar_pregunta()
+	protected function cargar_pregunta($pregunta_id = 0)
 	{
 		/*
 		Obtengo una pregunta del nivel no resuelta
@@ -144,26 +157,29 @@ class JugarController extends Controller
 		*/
 
 		$pregunta = new Pregunta;
-		return $pregunta->obtener_pregunta($this->_nivel);
+		return $pregunta->obtener_pregunta($this->_nivel, $pregunta_id);
 	}
 
-	protected function beforeAction($action)
+	protected function verificar_sesion()
 	{
 		//1. Verifico la sesión para inicializar el juego
 		if( !isset(Yii::app()->session['ronda']) )
 		{
 			$ronda = new Ronda;
-			
-			Yii::app()->session['ronda'] 	= $this->_ronda 	= $ronda->setRonda( Yii::app()->user->id );
-			Yii::app()->session['pregunta'] = $this->_pregunta 	= 1;
-			Yii::app()->session['nivel'] 	= $this->_nivel 	= 1;
+			Yii::app()->session['ronda'] 		= $this->_ronda 	= $ronda->iniciarRonda( Yii::app()->user->id );
+			Yii::app()->session['preguntan']	= $this->_preguntan = 0;
+			Yii::app()->session['preguntaid']	= $this->_preguntaid= 0;
+			Yii::app()->session['nivel'] 		= $this->_nivel 	= 1;
+			Yii::app()->session['situacion']	= $this->_situacion = 1; //1. inicio
 		}else
 		{
-			$this->_ronda  	 = Yii::app()->session['ronda'];
-			$this->_pregunta = Yii::app()->session['pregunta'];
-			$this->_nivel 	 = Yii::app()->session['nivel'];
+			$this->_ronda  	 	= Yii::app()->session['ronda'];
+			$this->_preguntan 	= Yii::app()->session['preguntan'];
+			$this->_preguntaid 	= Yii::app()->session['preguntaid'];
+			$this->_nivel 	 	= Yii::app()->session['nivel'];
+			$this->_situacion	= Yii::app()->session['situacion'];
+
 		}
-		return true;
 	}
 
 }

@@ -6,9 +6,8 @@
  * The followings are the available columns in table 'ronda':
  * @property integer $id
  * @property integer $jugador_id
- * @property integer $puntos
- * @property string $tiempo
- * @property string $preguntas
+ * @property integer $tiempo
+ * @property integer $preguntas
  * @property integer $nivel
  * @property string $fecha
  * @property integer $estado
@@ -45,12 +44,11 @@ class Ronda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('jugador_id, puntos, tiempo, preguntas, nivel, fecha, estado', 'required'),
-			array('jugador_id, puntos, nivel, estado', 'numerical', 'integerOnly'=>true),
-			array('preguntas', 'length', 'max'=>255),
+			//array('tiempo, preguntas, nivel, puntos, fecha, estado', 'required'),
+			//array('tiempo, preguntas, nivel, puntos, estado', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, jugador_id, puntos, tiempo, preguntas, nivel, fecha, estado', 'safe', 'on'=>'search'),
+			array('id, jugador_id, tiempo, preguntas, nivel, fecha, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,10 +73,10 @@ class Ronda extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'jugador_id' => 'Jugador',
-			'puntos' => 'Puntos',
 			'tiempo' => 'Tiempo',
 			'preguntas' => 'Preguntas',
 			'nivel' => 'Nivel',
+			'puntos' => 'Puntos',
 			'fecha' => 'Fecha',
 			'estado' => 'Estado',
 		);
@@ -97,10 +95,10 @@ class Ronda extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('jugador_id',$this->jugador_id);
-		$criteria->compare('puntos',$this->puntos);
-		$criteria->compare('tiempo',$this->tiempo,true);
-		$criteria->compare('preguntas',$this->preguntas,true);
+		$criteria->compare('tiempo',$this->tiempo);
+		$criteria->compare('preguntas',$this->preguntas);
 		$criteria->compare('nivel',$this->nivel);
+		$criteria->compare('puntos',$this->puntos);
 		$criteria->compare('fecha',$this->fecha,true);
 		$criteria->compare('estado',$this->estado);
 
@@ -109,7 +107,7 @@ class Ronda extends CActiveRecord
 		));
 	}
 
-	public function setRonda($jugador_id)
+	public function iniciarRonda($jugador_id)
 	{
 		$this->jugador_id = $jugador_id;
 		$this->puntos = 0;
@@ -122,11 +120,6 @@ class Ronda extends CActiveRecord
 		$this->save();
 
 		return $this->getPrimaryKey();
-
-	}
-
-	protected function beforeSave()
-	{
 
 	}
 }

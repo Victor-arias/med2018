@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nivel_id'); ?>
-		<?php echo $form->textField($model,'nivel_id'); ?>
+		<?php echo $form->dropDownList($model,'nivel_id', CHtml::listData(Nivel::model()->findAll(), 'id', 'nombre'), array('options' => array( '2' =>array('selected'=>true))) ); ?>
 		<?php echo $form->error($model,'nivel_id'); ?>
 	</div>
 
@@ -27,13 +27,8 @@
 		<?php echo $form->error($model,'pregunta'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'estado'); ?>
-		<?php echo $form->textField($model,'estado'); ?>
-		<?php echo $form->error($model,'estado'); ?>
-	</div>
-
 	<div class="row buttons">
+		<?php echo $form->hiddenField($model,'estado', array('value' => 1)); ?>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 

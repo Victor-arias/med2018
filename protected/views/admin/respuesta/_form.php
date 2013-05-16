@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'pregunta_id'); ?>
-		<?php echo $form->textField($model,'pregunta_id'); ?>
+		<?php echo $form->dropDownList($model,'pregunta_id', CHtml::listData(Pregunta::model()->findAll(), 'id', 'pregunta'), array('options' => array( $_GET['id'] =>array('selected'=>true))) ); ?>
 		<?php echo $form->error($model,'pregunta_id'); ?>
 	</div>
 
@@ -29,7 +29,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'es_correcta'); ?>
-		<?php echo $form->textField($model,'es_correcta'); ?>
+		<?php echo $form->dropDownList($model,'es_correcta', array( 0 => 'No', 1 => 'Si') ); ?>
 		<?php echo $form->error($model,'es_correcta'); ?>
 	</div>
 

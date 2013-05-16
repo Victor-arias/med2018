@@ -99,22 +99,19 @@ class Pregunta extends CActiveRecord
 		));
 	}
 
-	public function obtener_pregunta($nivel = 5)
+	public function obtener_pregunta($nivel = 5, $pregunta_id = 0)
 	{
 		
-		$max = $this->count();
-		$offset = rand(0, $max-1);
-
-		$criteria 				= new CDbCriteria;
-		$criteria->condition 	= 'nivel_id=:nivel_id';
-		$criteria->params 		= array(':nivel_id' => $nivel);
-		$criteria->offset 		= $offset;
-		$criteria->limit 		= 1;
-
-		//verificar que la pregunta no esté resuelta por este usuario
-
-		$pregunta = $this->findAll($criteria);
-		$pregunta = $pregunta[0];
+		if($pregunta_id)
+		{
+			$pregunta = $this->findByPk($pregunta_id);			
+		}
+		else
+		{
+			
+			$pregunta = $this->pregunta_al_azar($nivel);
+			
+		}
 
 		$rcriteria 				= new CDbCriteria;
 		$rcriteria->select 		= array('id', 'respuesta');
@@ -130,4 +127,79 @@ class Pregunta extends CActiveRecord
 		return $result;
 
 	}
+
+	protected function pregunta_al_azar($nivel)
+	{
+		$prCriteria = new CDbCriteria;
+		$prCriteria->select = 'pregunta_id';
+		$prCriteria->with = array( 'ronda' => array(
+											'select' => null, 
+											'condition' => 'jugador_id='.Yii::app()->user->id,
+											), 
+							);
+		
+		$pr = PreguntaXRonda::model()->findAll($prCriteria);
+		$preguntas = array();
+		for($i=0; $i < count($pr); $i++)
+				array_push($preguntas, $pr[$i]->pregunta_id);
+
+
+		$max = $this->count();
+		$offset = rand(0, $max-1);
+
+		$pcriteria 				= new CDbCriteria;
+		$pcriteria->addCondition('nivel_id='.$nivel);
+		$pcriteria->addNotInCondition('id', $preguntas);
+		$pcriteria->offset 		= $offset;
+		$pcriteria->limit 		= 1;
+	
+		$pregunta = $this->findAll($pcriteria);
+		if(isset($pregunta[0]))
+			 $pregunta = $pregunta[0];
+		else
+		{
+			$pregunta = $this->pregunta_al_azar($nivel);
+		}
+
+		return $pregunta;
+	}
+
+	protected function pregunta_al_azar_bad($nivel)
+	{
+		$max = $this->count();
+		$offset = rand(0, $max-1);
+
+		$pcriteria 				= new CDbCriteria;
+		$pcriteria->addCondition('nivel_id', $nivel);
+		$pcriteria->offset 		= $offset;
+		$pcriteria->limit 		= 1;
+	
+		$pregunta = $this->findAll($pcriteria);
+		$pregunta = $pregunta[0];
+
+		//Verifico que no haya resuelto ya la pregunta
+		$prCriteria = new CDbCriteria;
+		$prCriteria->with = array( 'ronda' => array(
+											'select' => null, 
+											'condition' => 'pregunta_id='.$pregunta->id,
+											'with' => array(
+														'jugador' => array(
+															'select' => 'id', 
+															'condition' => 'jugador.id ='.Yii::app()->user->id,
+															),
+												),
+											), 
+							);
+		
+		$pr = PreguntaXRonda::model()->findAll($prCriteria);
+
+		if( isset($pr[0]) )
+		{
+			$pregunta = $this->pregunta_al_azar($nivel);
+		}
+
+		return $pregunta;
+
+	}//pregunta_al_azar
+
 }

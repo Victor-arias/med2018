@@ -71,7 +71,7 @@ class RespuestaController extends Controller
 		{
 			$model->attributes=$_POST['Respuesta'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('create','id'=>$model->pregunta_id));
 		}
 
 		$this->render('create',array(
