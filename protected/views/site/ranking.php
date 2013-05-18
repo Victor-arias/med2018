@@ -3,6 +3,9 @@
 $this->pageTitle = 'Ranking - '.Yii::app()->name;
 ?>
 <div id="ranking">
+	<?php if( Yii::app()->user->hasFlash('error') ):?>
+		<div><?php echo Yii::app()->user->getFlash('error'); ?></div>
+	<?php endif;?>
 	<div id="ninos">
 		<h2>Niños</h2>
 		<ul>

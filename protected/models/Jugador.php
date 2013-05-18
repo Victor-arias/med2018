@@ -54,16 +54,16 @@ class Jugador extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, documento, sexo, fecha_nacimiento, colegio, nombre_adulto, documento_adulto, correo_adulto, telefono, celular, direccion, parentesco_id', 'required'),
+			array('nombre, documento, sexo, fecha_nacimiento, colegio, nombre_adulto, documento_adulto, correo_adulto, telefono, parentesco_id', 'required'),
 			array('documento', 'unique'),
-			array('documento, documento_adulto, celular, parentesco_id', 'numerical', 'integerOnly'=>true),
-			array('nombre, colegio, nombre_adulto, direccion', 'length', 'max'=>255),
+			array('documento, documento_adulto, parentesco_id', 'numerical', 'integerOnly'=>true),
+			array('nombre, colegio, nombre_adulto', 'length', 'max'=>255),
 			array('sexo', 'length', 'max'=>1),
 			array('correo_adulto', 'length', 'max'=>100),
 			array('telefono', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nombre, documento, usuario_id, sexo, fecha_nacimiento, colegio, nombre_adulto, documento_adulto, correo_adulto, telefono, celular, direccion, parentesco_id, fecha_registro, fecha_actualizacion, puntaje', 'safe', 'on'=>'search'),
+			array('id, nombre, documento, usuario_id, sexo, fecha_nacimiento, colegio, nombre_adulto, documento_adulto, correo_adulto, telefono, parentesco_id, fecha_registro, fecha_actualizacion, puntaje', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -98,8 +98,6 @@ class Jugador extends CActiveRecord
 			'documento_adulto' => 'Documento Adulto',
 			'correo_adulto' => 'Correo Adulto',
 			'telefono' => 'Telefono',
-			'celular' => 'Celular',
-			'direccion' => 'Direccion',
 			'parentesco_id' => 'Parentesco',
 			'fecha_registro' => 'Fecha Registro',
 			'fecha_actualizacion' => 'Fecha Actualizacion',
@@ -129,8 +127,6 @@ class Jugador extends CActiveRecord
 		$criteria->compare('documento_adulto',$this->documento_adulto);
 		$criteria->compare('correo_adulto',$this->correo_adulto,true);
 		$criteria->compare('telefono',$this->telefono,true);
-		$criteria->compare('celular',$this->celular);
-		$criteria->compare('direccion',$this->direccion,true);
 		$criteria->compare('parentesco_id',$this->parentesco_id);
 		$criteria->compare('fecha_registro',$this->fecha_registro,true);
 		$criteria->compare('fecha_actualizacion',$this->fecha_actualizacion,true);

@@ -27,7 +27,7 @@ $activeform = $this->beginWidget('CActiveForm', array(
 
 <div class="row">
 	<?php echo $activeform->labelEx($usuario,'correo'); ?>
-	<?php echo $activeform->textField($usuario,'correo',array('size'=>60,'maxlength'=>100)); ?> 
+	<?php echo $activeform->emailField($usuario,'correo',array('size'=>60, 'maxlength'=>100)); ?> 
 </div>
 
 <div class="row">
@@ -53,7 +53,7 @@ $activeform = $this->beginWidget('CActiveForm', array(
 	</div>
 	<div class="row">
 		<?php echo $activeform->labelEx($jugador,'colegio'); ?>
-		<?php echo $activeform->textField($jugador,'colegio', array('class' => 'datepicker')); ?>
+		<?php echo $activeform->textField($jugador,'colegio', array('size'=>45,'maxlength'=>255)); ?>
 		<?php echo $activeform->error($jugador,'colegio'); ?>
 	</div>
 	<div class="row">
@@ -85,7 +85,7 @@ $activeform = $this->beginWidget('CActiveForm', array(
 
 	<div class="row">
 		<?php echo $activeform->labelEx($jugador,'correo_adulto'); ?>
-		<?php echo $activeform->textField($jugador,'correo_adulto',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $activeform->emailField($jugador,'correo_adulto',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $activeform->error($jugador,'correo_adulto'); ?>
 	</div>
 
@@ -93,18 +93,6 @@ $activeform = $this->beginWidget('CActiveForm', array(
 		<?php echo $activeform->labelEx($jugador,'telefono'); ?>
 		<?php echo $activeform->textField($jugador,'telefono',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $activeform->error($jugador,'telefono'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $activeform->labelEx($jugador,'celular'); ?>
-		<?php echo $activeform->textField($jugador,'celular',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $activeform->error($jugador,'celular'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $activeform->labelEx($jugador,'direccion'); ?>
-		<?php echo $activeform->textField($jugador,'direccion',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $activeform->error($jugador,'direccion'); ?>
 	</div>
 
 	<div class="row buttons submit">

@@ -104,8 +104,6 @@ class SiteController extends Controller
 	            				);
 
 	            $this->verificarCorreo($datos);
-
-
 	        }
 		}
 

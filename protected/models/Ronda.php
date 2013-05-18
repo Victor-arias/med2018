@@ -122,4 +122,15 @@ class Ronda extends CActiveRecord
 		return $this->getPrimaryKey();
 
 	}
+
+	public function getRondasDia($jugador_id)
+	{
+		$a = new CDbCriteria;
+
+		$a->addCondition('jugador_id = '. $jugador_id);
+		//$a->addCondition('DATE(fecha)='. date('Y-m-d'));
+		
+		return $this->count($a);
+
+	}
 }

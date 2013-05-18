@@ -17,6 +17,3 @@
 <p>Correo: <?php echo $jugador->correo_adulto ?></p>
 <p>Documento: <?php echo $jugador->documento_adulto ?></p>
 <p>Teléfono fijo: <?php echo $jugador->telefono ?></p>
-<p>Teléfono celular: <?php echo $jugador->celular ?></p>
-<p>Dirección: <?php echo $jugador->direccion ?></p>
-

@@ -9,6 +9,7 @@ class UserIdentity extends CUserIdentity
 {
 	private $_id;
 	public $correo;
+	const ERROR_STATUS = 4;
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -28,10 +29,13 @@ class UserIdentity extends CUserIdentity
 	{
 		$correo = strtolower($this->correo);
 		$usuario = Usuario::model()->find('LOWER(correo)=?',array($correo));
+		//print_r($usuario->estado);
 		if($usuario === null)
             $this->errorCode=self::ERROR_USERNAME_INVALID;
         else if(!$usuario->validatePassword($this->password))
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
+        else if($usuario->estado == 0)
+            $this->errorCode=self::ERROR_STATUS;
         else
         {
             $this->_id 		= $usuario->id;

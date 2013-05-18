@@ -92,6 +92,9 @@ return array(
             'enableCsrfValidation'	=> true,
             'enableCookieValidation'=> true,
         ),*/
+		'session' => array(
+				//'cookieMode' => 'none',
+			),
         'mail' => array(
             'class' => 'ext.yii-mail.YiiMail',
             'transportType'=>'smtp',
@@ -111,5 +114,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'victor.arias@telemedellin.tv',
+		'rondasxdia'=>20,
+		'preguntasxnivel' => 4,
 	),
 );
