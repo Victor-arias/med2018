@@ -9,6 +9,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'pregunta-form',
 	'enableAjaxValidation'=>false,
+	'focus' => array($model, 'pregunta'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -17,7 +18,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nivel_id'); ?>
-		<?php echo $form->dropDownList($model,'nivel_id', CHtml::listData(Nivel::model()->findAll(), 'id', 'nombre'), array('options' => array( '2' =>array('selected'=>true))) ); ?>
+		<?php echo $form->dropDownList($model,'nivel_id', CHtml::listData(Nivel::model()->findAll(), 'id', 'nombre'), array('options' => array( '5' =>array('selected'=>true))) ); ?>
 		<?php echo $form->error($model,'nivel_id'); ?>
 	</div>
 

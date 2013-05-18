@@ -148,6 +148,37 @@ class Jugador extends CActiveRecord
 		 $interval = $now->diff($date);
 		 return $interval->y;
 	}
+	
+	public function getPuntos($jugador_id = 0)
+	{
+		 if($jugador_id == 0) $jugador_id = Yii::app()->user->id;
+		 $jugador = $this->findByPk($jugador_id, array('select' => 'puntaje'));
+		 return $jugador->puntaje;
+	}
+
+	public function setPuntos($puntaje, $jugador_id = 0)
+	{
+		if($jugador_id == 0) $jugador_id = Yii::app()->user->id;
+		$jugador = $this->findByPk($jugador_id);
+		$a = array('puntaje' => ($jugador->puntaje + $puntaje) );
+		if( $jugador->updateByPk($jugador->id, $a) )
+			return $this->getPuntos($jugador_id);
+		else
+			return false;
+	}
+
+	public function getRanking()
+	{
+		 
+		 $c = new CDbCriteria;
+		 $c->addCondition('puntaje > 0');
+		 $c->order = 'puntaje DESC';
+		 $ninos = $this->findAllByAttributes(array('sexo' => 'M'), $c);
+		 $ninas = $this->findAllByAttributes(array('sexo' => 'F'), $c);
+		 $resultado = array('ninos' => $ninos, 'ninas' => $ninas);
+		 return $resultado;
+		 
+	}
 
 	protected function beforeSave()
 	{

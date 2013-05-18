@@ -130,6 +130,8 @@ class Pregunta extends CActiveRecord
 
 	protected function pregunta_al_azar($nivel)
 	{
+		/*
+		Descomentar para activar la NO repetición
 		$prCriteria = new CDbCriteria;
 		$prCriteria->select = 'pregunta_id';
 		$prCriteria->with = array( 'ronda' => array(
@@ -141,7 +143,7 @@ class Pregunta extends CActiveRecord
 		$pr = PreguntaXRonda::model()->findAll($prCriteria);
 		$preguntas = array();
 		for($i=0; $i < count($pr); $i++)
-				array_push($preguntas, $pr[$i]->pregunta_id);
+				array_push($preguntas, $pr[$i]->pregunta_id);*/
 
 
 		$max = $this->count();
@@ -149,7 +151,7 @@ class Pregunta extends CActiveRecord
 
 		$pcriteria 				= new CDbCriteria;
 		$pcriteria->addCondition('nivel_id='.$nivel);
-		$pcriteria->addNotInCondition('id', $preguntas);
+		//$pcriteria->addNotInCondition('id', $preguntas);
 		$pcriteria->offset 		= $offset;
 		$pcriteria->limit 		= 1;
 	

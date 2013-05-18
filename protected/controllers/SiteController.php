@@ -117,6 +117,12 @@ class SiteController extends Controller
 		);
 	}
 
+	public function actionPuntajes()
+	{
+		$ranking = Jugador::model()->getRanking();
+		$this->render('ranking', array('ranking' => $ranking));
+	}//Ranking
+
 	public function actionVerificar($llave_activacion)
 	{
 		$verificar = Usuario::model()->verificarLlave($llave_activacion);

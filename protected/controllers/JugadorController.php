@@ -2,7 +2,6 @@
 
 class JugadorController extends Controller
 {
-	public $layout = '//layouts/column2';
 	/**
 	 * @return array action filters
 	 */
@@ -27,7 +26,7 @@ class JugadorController extends Controller
 				'users'=>array('*'),
 			),*/
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index', 'editar'),
+				'actions'=>array('perfil', 'editar'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -36,18 +35,12 @@ class JugadorController extends Controller
 		);
 	}
 
-	public function actionIndex()
+	public function actionPerfil()
 	{
 		$usuario_id = Yii::app()->user->id;
 		$jugador = Jugador::model()->with('usuario', 'parentesco')->findByAttributes(array('usuario_id' => $usuario_id));
 
 		$this->render('perfil', array('jugador' => $jugador));
-	}
-
-	public function actionPerfil()
-	{
-		$usuario = Yii::app()->user;
-		$this->render('perfil', array('usuario' => $usuario));
 	}
 
 	/**

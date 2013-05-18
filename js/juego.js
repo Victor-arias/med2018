@@ -1,5 +1,9 @@
 $(function() {
 	var situacion 	= 0;
+	var nivel		= 1;
+	var puntosr		= 0;
+	var puntost		= 0;
+	var preguntan	= 0;
 	var estado 		= $('#estado');
 	var dpregunta 	= $('#pregunta');
 
@@ -21,6 +25,13 @@ $(function() {
 	$.post('jugar/control', get_control);
 
 	//Funciones
+	function actualizar_datos()
+	{
+		$('#nivel').text(nivel);
+		$('#numero_pregunta').text(preguntan);
+		$('#puntos').text(puntosr);
+		$('#total_puntos').text(puntost);
+	}//actualizar_datos
 	function cargar_pregunta(e)
 	{
 		console.log('cargar_pregunta')
@@ -38,12 +49,17 @@ $(function() {
 		console.log('control');
 		console.log(data);
 		situacion = data.s;
+		nivel	  = data.n;
+		preguntan = data.pn;
+		puntosr	  = data.pr;
+		puntost	  = data.pt;
 		//1. Inicializo el juego
 		inicializar();
 	}//get_control
 
 	function inicializar()
 	{
+		actualizar_datos();
 		switch(situacion)
 		{
 			case 1://inicio
@@ -97,7 +113,7 @@ $(function() {
 				console.log('mensaje: incorrecto');
 				mp.text('Respuesta equivocada');
 				mb.text('Salir del juego');
-				mb.attr('href', 'ranking');
+				mb.attr('href', 'puntajes');
 				break;
 			case 5:
 				console.log('situacion: cambio de nivel');
@@ -131,13 +147,21 @@ $(function() {
 				rd.text(tmp_respuestas[3].respuesta).addClass(tmp_respuestas[3].id);
 
 				ocultar_mensaje();
+				preguntan = data.pn;
+				$('#numero_pregunta').text(preguntan);
 				dpregunta.show('fast');
 			}
 			else
 			{
 				console.log('nanai');
+				inicializar();
 			}
 
+		}
+		else
+		{
+			situacion = data.s;
+			inicializar();
 		}//data.s
 	}//mostrar_pregunta
 
@@ -146,6 +170,10 @@ $(function() {
 		console.log('mostrar_respuesta');
 		console.log(data);
 		situacion = data.s;
+		nivel	  = data.n;
+		preguntan = data.pn;
+		puntosr	  = data.pr;
+		puntost	  = data.pt;
 		inicializar();
 	}//mostrar_respuesta
 

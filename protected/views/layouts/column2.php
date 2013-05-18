@@ -16,10 +16,6 @@
 							array('usuario_id' => Yii::app()->user->id)
 	    				);
 	    			}
-	    			if($this->id == 'jugar')
-	    			{
-	    				echo 'Puntaje total';
-	    			}
 			?>
 		</div><!-- sidebar -->
 	</div>

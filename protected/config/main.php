@@ -45,7 +45,12 @@ return array(
 			'rules'=>array(
 				'iniciar-sesion'	=>'site/login',
 				'cerrar-sesion'		=>'site/logout',
+				'como-participar'	=>'site/page/view/instrucciones',
+				'premio'			=>'site/page/view/premio',
+				'perfil'			=>'jugador/perfil',
+				'puntajes'			=>'site/puntajes',
 				'registro'			=>'site/registro',
+				'terminos-y-condiciones' =>'site/page/view/terminos-y-condiciones',
 				'<controller:\w+>/<action:\w+>/<llave_activacion:\w+>'=>'<controller>/<action>',
 				'<controller:\w\->/<id:\d+>'=>'<controller>/view',
 				'<controller:\w\->/<action:\w\->/<id:\d+>'=>'<controller>/<action>',

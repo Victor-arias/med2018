@@ -9,6 +9,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'respuesta-form',
 	'enableAjaxValidation'=>false,
+	'focus' => array($model, 'respuesta'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>

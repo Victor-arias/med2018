@@ -10,6 +10,5 @@ $this->pageTitle = Yii::app()->name;
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/yDJos8Kfank?rel=0" frameborder="0" allowfullscreen></iframe>
 
-<p>Tuitear Me gusta</p>
 <p><?php echo CHtml::link('Regístrate para comenzar', array('registro'))?></p>
-<p><?php echo CHtml::link('Si ya estás registrado, ¡Comienza a jugar!', array('/iniciar-sesion'))?></p>
+<p><?php echo CHtml::link('Si ya estás registrado, ¡Comienza a jugar!', array('/jugar'))?></p>
