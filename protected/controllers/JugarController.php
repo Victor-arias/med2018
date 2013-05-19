@@ -48,10 +48,11 @@ class JugarController extends Controller
 	public function actionTest()
 	{
 		$this->verificar_sesion();
-		echo 'jugador_id ' . $this->_jugador_id;
-		$rondasdia = Ronda::model()->getRondasDia( $this->_jugador_id );
-		print_r($rondasdia);
-		//print_r(Yii::app()->params['rondasxdia']);
+		$estadisticas = Ronda::model()->obtener_estadisticas($this->_jugador_id);
+		echo '<pre>';
+		print_r($estadisticas);
+		echo '</pre>';
+		echo gmdate('d-m-Y H:i:s', 29640);
 	}
 
 	public function actionJugar()
@@ -167,7 +168,9 @@ class JugarController extends Controller
 	    	{
 	    		if($this->_nivel < 5){
 	    			$tmpsituacion = 5; //5. Cambio de nivel	
+	    			$newnivel = Nivel::model()->findByPk($this->_nivel + 1);
 	    			Yii::app()->session['nivel'] = $this->_nivel = $this->_nivel + 1;
+	    			Yii::app()->session['tiempo'] = $this->_tiempo = $newnivel->tiempo;
 	    		}else{
 	    			$tmpsituacion = 6; //6. Ronda completada
 	    		}

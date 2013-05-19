@@ -133,4 +133,69 @@ class Ronda extends CActiveRecord
 		return $this->count($a);
 
 	}
+
+	public function obtener_estadisticas($jugador_id = 0)
+	{
+		//Número total de rondas
+		$numero_rondas = $this->obtener_numero_rondas($jugador_id);
+		
+		//Tiempo total
+		$tiempo_total = gmdate( 'H:i:s', $this->obtener_total($jugador_id, 'tiempo') );
+		
+		//Total preguntas
+		$preguntas_total = $this->obtener_total($jugador_id, 'preguntas');
+
+		//Puntos ultima ronda
+		$puntos_ultima = $this->obtener_ultima($jugador_id, 'puntos');
+
+		//Tiempo ultima ronda
+		$tiempo_ultima = gmdate( 'i:s', $this->obtener_ultima($jugador_id, 'tiempo') );
+
+		//Preguntas última ronda
+		$preguntas_ultima = $this->obtener_ultima($jugador_id, 'preguntas');
+
+		//Fecha última ronda
+		$fecha_ultima = date( 'd-m-Y', strtotime( $this->obtener_ultima($jugador_id, 'fecha') ) );
+
+		$estadisticas = array(	'rondas' 			=> $numero_rondas,
+								'tiempo' 			=> $tiempo_total,
+								'preguntas' 		=> $preguntas_total,
+								'puntos_ultima' 	=> $puntos_ultima,
+								'tiempo_ultima' 	=> $tiempo_ultima,
+								'preguntas_ultima' 	=> $preguntas_ultima,
+								'fecha_ultima' 		=> $fecha_ultima,
+							);
+
+		return $estadisticas;
+	}//obtener_estadisticas
+
+	protected function obtener_numero_rondas($jugador_id)
+	{
+		$rondas = $this->findAll('jugador_id = ' . $jugador_id);
+		return count($rondas);
+	}
+
+	protected function obtener_total($jugador_id, $campo)
+	{
+		$c = new CDbCriteria;
+		$c->select = 'Sum('.$campo.') AS '.$campo.', jugador_id';
+		$c->group 	= 'jugador_id';
+		$c->addCondition('jugador_id = ' . $jugador_id);
+		$total = $this->find($c);
+		return $total->$campo;
+	}
+	protected function obtener_ultima($jugador_id, $campo = null)
+	{
+		$c = new CDbCriteria;
+		if($campo != null)
+			$c->select = $campo.', jugador_id';
+		$c->addCondition('jugador_id = ' . $jugador_id);
+		$c->order = 'id DESC';
+		$c->limit = 1;
+		$ultima = $this->find($c);
+		if($campo != null)
+			return $ultima->$campo;
+		else
+			return $ultima;
+	}
 }

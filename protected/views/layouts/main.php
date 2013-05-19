@@ -21,12 +21,12 @@
 <body>
 <header>
 	<div id="header-content">
-		<div id="logo"><?php echo CHTML::link( CHtml::encode('Viaja a Suiza con Medellín 2018'), array('/') ); ?></div>
+		<div id="logo"><?php echo CHtml::link( CHtml::encode('Viaja a Suiza con Medellín 2018'), array('/') ); ?></div>
 		<div id="mainmenu">
 			<?php $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
-					array('label'=>'Cómo participar', 'url'=>array('/como-participar'), 'linkOptions' => array('class' => 'item1')),
-					array('label'=>'Qué incluye el premio', 'url'=>array('/premio'), 'linkOptions' => array('class' => 'item1')),
+					array('label'=>'¿Cómo jugar?', 'url'=>array('/como-jugar'), 'linkOptions' => array('class' => 'item1')),
+					array('label'=>'¿Qué te puedes ganar?', 'url'=>array('/premio'), 'linkOptions' => array('class' => 'item1')),
 					array('label'=>'Así van los puntajes', 'url'=>array('/puntajes'), 'linkOptions' => array('class' => 'item1')),
 				),
 			)); ?>
@@ -60,7 +60,7 @@
 		<li><a class="ol" href="http://www.medellin2018.org" target="_blank">Olímpicos</a></li>
 		<li><a class="al" href="http://www.medellin.gov.co" target="_blank">Alcaldía</a></li>
 	</ul>
-	<?php echo CHTML::link( 'Términos y condiciones', array('/terminos-y-condiciones'), array('class' => 'terminos' ) ); ?>
+	<?php echo CHtml::link( 'Términos y condiciones', array('/terminos-y-condiciones'), array('class' => 'terminos' ) ); ?>
 	</div>
 </footer>
 </body>

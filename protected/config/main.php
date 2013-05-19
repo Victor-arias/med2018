@@ -45,7 +45,7 @@ return array(
 			'rules'=>array(
 				'iniciar-sesion'	=>'site/login',
 				'cerrar-sesion'		=>'site/logout',
-				'como-participar'	=>'site/page/view/instrucciones',
+				'como-jugar'		=>'site/page/view/instrucciones',
 				'premio'			=>'site/page/view/premio',
 				'perfil'			=>'jugador/perfil',
 				'puntajes'			=>'site/puntajes',
@@ -88,10 +88,10 @@ return array(
 				*/
 			),
 		),
-		/*'request'=>array(
-            'enableCsrfValidation'	=> true,
-            'enableCookieValidation'=> true,
-        ),*/
+		'request'=>array(
+            //'enableCsrfValidation'	=> true,
+            //'enableCookieValidation'=> true,
+        ),
 		'session' => array(
 				//'cookieMode' => 'none',
 			),
