@@ -148,6 +148,9 @@ class Ronda extends CActiveRecord
 		//Puntos ultima ronda
 		$puntos_ultima = $this->obtener_ultima($jugador_id, 'puntos');
 
+		//Nivel ultima ronda
+		$nivel_ultima = $this->obtener_ultima($jugador_id, 'nivel');
+
 		//Tiempo ultima ronda
 		$tiempo_ultima = gmdate( 'i:s', $this->obtener_ultima($jugador_id, 'tiempo') );
 
@@ -160,6 +163,7 @@ class Ronda extends CActiveRecord
 		$estadisticas = array(	'rondas' 			=> $numero_rondas,
 								'tiempo' 			=> $tiempo_total,
 								'preguntas' 		=> $preguntas_total,
+								'nivel' 			=> $nivel_ultima,
 								'puntos_ultima' 	=> $puntos_ultima,
 								'tiempo_ultima' 	=> $tiempo_ultima,
 								'preguntas_ultima' 	=> $preguntas_ultima,

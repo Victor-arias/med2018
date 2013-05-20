@@ -24,12 +24,12 @@ return array(
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
-		/*'gii'=>array(
+		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'asdf1234*',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-		),*/
+		),
 		
 	),
 
@@ -42,7 +42,6 @@ return array(
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
 			'urlFormat'=>'path',
-			'showScriptName'=>false,
 			'rules'=>array(
 				'iniciar-sesion'	=>'site/login',
 				'cerrar-sesion'		=>'site/logout',
@@ -51,7 +50,6 @@ return array(
 				'perfil'			=>'jugador/perfil',
 				'puntajes'			=>'site/puntajes',
 				'registro'			=>'site/registro',
-				'verificar/<llave_activacion:\w+>'=>'site/verificar',
 				'terminos-y-condiciones' =>'site/page/view/terminos-y-condiciones',
 				'<controller:\w+>/<action:\w+>/<llave_activacion:\w+>'=>'<controller>/<action>',
 				'<controller:\w\->/<id:\d+>'=>'<controller>/view',
@@ -64,10 +62,10 @@ return array(
 		),*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=med2018_medellin2018',
+			'connectionString' => 'mysql:host=localhost;dbname=medellin2018',
 			'emulatePrepare' => true,
-			'username' => 'med2018_med2018',
-			'password' => 'V14j4a5v1z4**',/*V14j4a5v1z4***/
+			'username' => 'root',
+			'password' => '',/*V14j4a5v1z4***/
 			'charset' => 'utf8',
 			//'enableProfiling'=>true,
 		),
@@ -105,7 +103,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'victor.arias@telemedellin.tv',
-		'rondasxdia'=>2,
+		'rondasxdia'=>20,
 		'preguntasxnivel' => 4,
 	),
 );

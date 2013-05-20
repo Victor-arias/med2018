@@ -2,7 +2,7 @@
 
 class JugarController extends Controller
 {
-	public $layout 		= '//layouts/column2';
+	//public $layout 		= '//layouts/column2';
 	private $_jugador_id= 0;
 	private $_ronda 	= 0;
 	private $_preguntas = array();

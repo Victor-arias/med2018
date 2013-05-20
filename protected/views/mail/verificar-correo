@@ -1,9 +1,0 @@
-<html>
-<head>
-</head>
-<body>
-    Hola <?php echo $datos['nombre']; ?>, <br>
-    por favor confirma que te has registrado en el concurso _____________ haciendo clic en este enlace 
-    <a href="http://localhost/medellin2018/index.php?r=site/verificar/" <?php echo $datos['llave_activacion']?>>Verificar correo</a>
-</body>
-</html>

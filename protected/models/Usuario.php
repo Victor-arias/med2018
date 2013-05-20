@@ -119,7 +119,10 @@ class Usuario extends CActiveRecord
 			)
 		);
 		if($existe)
+		{
+			$existe->updateByPk($existe->id, array('llave_activacion' => '', 'estado' => 1));
 			return $existe;
+		}
 		else
 			return false;
 		

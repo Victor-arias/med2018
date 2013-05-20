@@ -5,14 +5,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/stora
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/juego.js', CClientScript::POS_HEAD);
 ?>
 <p id="estado">
-	Nivel <span id="nivel">1</span> - Pregunta <span id="numero_pregunta">1</span> - <span id="puntos">0</span> puntos
+	<span class="nivel">Nivel <span id="nivel">2</span> </span> <span class="pregunta">Pregunta <span id="numero_pregunta">5</span></span> <span id="puntos">40</span> <span class="puntos">puntos</span>
 </p>
+<p class="puntaje-general">Puntaje general </br><span id="total_puntos">11450</span></p>
 <div id="mensaje">
 	<p></p>
-	<a href="#"></a>
+	<a href="#" class=""></a>
 </div>
 <div id="pregunta">
-	<p>Tiempo <span id="tiempo"></span></p>
+	<p class="tiempo">Tiempo <span id="tiempo"></span></p>
 	<p id="p"></p>
 	<a href="#" id="ra"></a>
 	<a href="#" id="rb"></a>
@@ -20,7 +21,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/juego
 	<a href="#" id="rd"></a>
 </div>
 <div id="sidebar">
-	<p>Puntaje general <span id="total_puntos">0</span></p>
 	<p>Ayudas</p>
 	<p></p>
 </div>
