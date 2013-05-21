@@ -1,23 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "respuesta".
+ * This is the model class for table "ayuda".
  *
- * The followings are the available columns in table 'respuesta':
+ * The followings are the available columns in table 'ayuda':
  * @property integer $id
- * @property integer $pregunta_id
- * @property string $respuesta
- * @property integer $es_correcta
+ * @property string $nombre
+ * @property integer $estado
  *
  * The followings are the available model relations:
- * @property Pregunta $pregunta
+ * @property AyudaXRonda[] $ayudaXRondas
  */
-class Respuesta extends CActiveRecord
+class Ayuda extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Respuesta the static model class
+	 * @return Ayuda the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +28,7 @@ class Respuesta extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'respuesta';
+		return 'ayuda';
 	}
 
 	/**
@@ -40,12 +39,12 @@ class Respuesta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pregunta_id, respuesta, es_correcta', 'required'),
-			array('pregunta_id, es_correcta', 'numerical', 'integerOnly'=>true),
-			array('respuesta', 'length', 'max'=>255),
+			array('nombre, estado', 'required'),
+			array('estado', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, pregunta_id, respuesta, es_correcta', 'safe', 'on'=>'search'),
+			array('id, nombre, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +56,7 @@ class Respuesta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pregunta' => array(self::BELONGS_TO, 'Pregunta', 'pregunta_id'),
+			'ayudaXRondas' => array(self::HAS_MANY, 'AyudaXRonda', 'ayuda_id'),
 		);
 	}
 
@@ -68,9 +67,8 @@ class Respuesta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'pregunta_id' => 'Pregunta',
-			'respuesta' => 'Respuesta',
-			'es_correcta' => 'Es Correcta',
+			'nombre' => 'Nombre',
+			'estado' => 'Estado',
 		);
 	}
 
@@ -86,26 +84,11 @@ class Respuesta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('pregunta_id',$this->pregunta_id);
-		$criteria->compare('respuesta',$this->respuesta,true);
-		$criteria->compare('es_correcta',$this->es_correcta);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('estado',$this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
-	public function cincuenta($pregunta_id)
-	{
-		$c 				= new CDbCriteria;
-		$c->select 		= array('id');
-		$c->addCondition('pregunta_id =' . $pregunta_id);
-		$c->addCondition('es_correcta =' . 0);
-
-
-		$r = $this->findAll($c);
-		shuffle($r);
-		if(count($r)>2) unset($r[0]);
-		return $r;
 	}
 }

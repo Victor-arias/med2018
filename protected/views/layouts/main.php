@@ -13,6 +13,7 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link href='http://fonts.googleapis.com/css?family=Gochi+Hand' rel='stylesheet' type='text/css'>
+	<link rel="icon" href="/images/favicon.ico" />
 	<!--[if LTE IE 8]>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/modernizr.custom.95570.js"></script>
 	<![endif] -->
@@ -26,7 +27,7 @@
 		<div id="mainmenu">
 			<?php $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
-					array('label'=>'¿Cómo jugar?', 'url'=>array('/como-jugar'), 'linkOptions' => array('class' => 'item1')),
+					array('label'=>'¿Cómo participar?', 'url'=>array('/como-jugar'), 'linkOptions' => array('class' => 'item1')),
 					array('label'=>'¿Qué te puedes ganar?', 'url'=>array('/premio'), 'linkOptions' => array('class' => 'item1')),
 					array('label'=>'Así van los puntajes', 'url'=>array('/puntajes'), 'linkOptions' => array('class' => 'item1')),
 				),
@@ -59,6 +60,7 @@
 	<ul>
 		<li><a class="tm" href="http://www.telemedellin.tv" target="_blank">Telemedellín</a></li>
 		<li><a class="ol" href="http://www.medellin2018.org" target="_blank">Olímpicos</a></li>
+		<li><a class="mv" href="http://www.noviolenciamedellin.co/" target="_blank">Mayo por la vida</a></li>
 		<li><a class="al" href="http://www.medellin.gov.co" target="_blank">Alcaldía</a></li>
 	</ul>
 	<?php echo CHtml::link( 'Términos y condiciones', array('/terminos-y-condiciones'), array('class' => 'terminos' ) ); ?>

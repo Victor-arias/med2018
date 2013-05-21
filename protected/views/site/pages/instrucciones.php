@@ -7,11 +7,11 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 <h1>¿Cómo participar?</h1>
 
 <h2>¿Quiénes participan?</h2>
-<p>Si tienes de 10 a 16 años y estudias en una institución educativa de Medellín puedes participar en el concurso que te llevará a Suiza con un acompañante para ser de los primeros en saber si Medellín será la sede de los Juegos Olímpicos de la Juventud 2018.</p>
+<p>Si tienes de 10 a 14 años y estudias en una institución educativa de Medellín puedes participar en el concurso que te llevará a Suiza con un acompañante para ser de los primeros en saber si Medellín será la sede de los Juegos Olímpicos de la Juventud 2018.</p>
 
 <h2>¿Cómo entro a participar?</h2>
 
-<p>¡Pariticipar es muy fácil! </p>
+<p>¡Es muy fácil! </p>
 
 <p>Entra a <?php echo CHtml::link('www.concursomedellin2018.com', CHtml::normalizeUrl('http://www.concursomedellin2018.com') ); ?></p>
 
@@ -20,19 +20,19 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 <ul>
 	<li>Te pediremos un correo electrónico y una contraseña que debes recordar porque es muy importante para que puedas entrar a jugar ¡que no se te olvide!.</li>
 	<li>Te preguntaremos cómo te llamas, tu número de tarjeta de identidad, cuántos años tienes y si eres niño o niña. </li>
-	<li>También por el nombre de la persona adulta que cuida de ti, cuál es su nombre, su correo electrónico, su número de teléfono, dónde vive y qué relación tiene contigo.</li>
+	<li>También pon el nombre de la persona adulta que cuida de ti, cuál es su nombre, su correo electrónico, su número de teléfono, dónde vive y qué relación tiene contigo.</li>
 </ul>
 
 <p>Dale clic al botón que dice “registrarse” y ¡listo! ya estás inscrito y puedes comenzar a jugar. </p>
 
 <h2>Prepara tus conocimientos (3 ejes temáticos)</h2>
 
-<p>En el juego pondremos a prueba tus conocimientos sobre temas que seguro conoces: </p>
+<p>En el juego pondremos a prueba tus conocimientos con preguntas sobre temas que seguro conoces:</p>
 
 <ul>
 	<li>¿Qué tanto sabes de Medellín?</li>
 	<li>¿Qué haces tú por la convivencia de la ciudad?</li>
-	<li>¿Cuánto sabes de deporte?</li>
+	<li>¿Cuánto sabes de deporte y de los Juegos Olímpicos de la Juventud?</li>
 </ul>
 
 <p>A medida que vas avanzando en el juego y subes de nivel, las preguntas serán más difíciles, pero seguro tu sabes las respuestas y te va a ir muy bien.</p>

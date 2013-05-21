@@ -17,25 +17,22 @@ $this->pageTitle= 'Iniciar sesión - ' .Yii::app()->name;
 	),
 )); ?>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model, '', '', array('class' => 'flash-notice') ); ?>
 
 
 	<div class="row">
 		<?php echo $form->label($model,'correo'); ?>
 		<?php echo $form->emailField($model,'correo'); ?>
-		<?php echo $form->error($model,'correo'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
 	</div>
 
 	<div class="row rememberMe">
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
 		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 
 	<div class="row buttons">

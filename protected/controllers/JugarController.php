@@ -13,6 +13,7 @@ class JugarController extends Controller
 	private $_puntosr 	= 0;
 	private $_puntost 	= 0;
 	private $_situacion = 0;
+	private $_ayudas	= array();
 
 	/**
 	 * @return array action filters
@@ -36,7 +37,7 @@ class JugarController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('jugar', 'cargarpregunta', 'responder', 'control', 'tiempo', 'test'),
+				'actions'=>array('jugar', 'cargarpregunta', 'responder', 'control', 'tiempo', 'test', 'ayuda'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -48,11 +49,61 @@ class JugarController extends Controller
 	public function actionTest()
 	{
 		$this->verificar_sesion();
-		$estadisticas = Ronda::model()->obtener_estadisticas($this->_jugador_id);
-		echo '<pre>';
-		print_r($estadisticas);
+		
+
+		header('Content-Type: application/json; charset="UTF-8"');
+	    echo CJSON::encode( array('ayudas' => $this->_ayudas) );
+	    //Yii::app()->end();
+		/*echo '<pre>';
+		print_r($ayudas);
 		echo '</pre>';
-		echo gmdate('d-m-Y H:i:s', 29640);
+		echo gmdate('d-m-Y H:i:s', 29640);*/
+	}
+
+	public function actionAyuda()
+	{
+		$this->verificar_sesion();
+		if(!Yii::app()->request->isAjaxRequest) throw new CHttpException('403', 'Forbidden access.');
+		if( !isset($_POST['a']) && !is_int($_POST['a']) && strlen($_POST['a']) == 1) throw new CHttpException('403', 'Forbidden access.');
+		$ayuda = $_POST['a'];
+
+		if( $this->_situacion == 2 )
+		{
+			if( !in_array($ayuda, $this->_ayudas) )
+			{
+				if($ayuda == 2)
+				{
+					$malas = Respuesta::model()->cincuenta($this->_preguntaid);
+				}
+				if($ayuda == 3)
+				{
+					Yii::app()->session['preguntaid'] = $this->_preguntaid = 0;
+				}
+
+				$axr = new AyudaXRonda;
+				$axr->ayuda_id = $ayuda;
+				$axr->ronda_id = $this->_ronda;
+				$axr->save();
+				$rondasdia = Ronda::model()->getRondasDia( $this->_jugador_id );
+				Yii::app()->session['ayudas'] = $this->_ayudas = array();
+				Yii::app()->session['ayudas'] = $this->_ayudas = AyudaXRonda::model()->getAyudasDia($rondasdia);
+				$r = 's';
+			}
+			else
+			{
+				$r = 'n';
+			}	
+		}
+		else
+		{
+			$r = 'n';
+		}
+
+		$final = array('a' => $ayuda, 'd' => $r);
+		if( isset($malas) ) $final['malas'] = $malas;
+		header('Content-Type: application/json; charset="UTF-8"');
+	    echo CJSON::encode( $final );
+	    Yii::app()->end();
 	}
 
 	public function actionJugar()
@@ -76,15 +127,16 @@ class JugarController extends Controller
 		    $resultado = $this->cargar_pregunta();
 		    Yii::app()->session['situacion'] = $this->_situacion = 2; //2. pregunta  
 		    Yii::app()->session['preguntan'] = $this->_preguntan = ($this->_preguntan + 1); 
-		    Yii::app()->session['preguntaid']= $this->_preguntaid= $resultado['pregunta']->id;
+		    
 		}
-		$resultado = array_merge( $resultado, array('pn' => $this->_preguntan, 't' => $this->_tiempo) );
+		Yii::app()->session['preguntaid']= $this->_preguntaid= $resultado['pregunta']->id;
+		$resultado = array_merge( $resultado, array('pn' => $this->_preguntan, 't' => $this->_tiempo, 'a' => $this->_ayudas) );
 
 		header('Content-Type: application/json; charset="UTF-8"');
 		echo CJSON::encode( $resultado );
 	    Yii::app()->end();
 	
-	}
+	}//cargarPregunta
 
 	public function actionControl()
 	{
@@ -94,7 +146,8 @@ class JugarController extends Controller
 							'pn' => $this->_preguntan,
 							'pr' => $this->_puntosr,
 							'pt' => $this->_puntost,
-							't'  => $this->_tiempo, );
+							't'  => $this->_tiempo,
+							'a'	 => $this->_ayudas );
 		header('Content-Type: application/json; charset="UTF-8"');
 	    echo CJSON::encode( $respuesta );
 	    if($this->_situacion == 6 || $this->_situacion == 4) $this->limpiar_sesion();
@@ -191,11 +244,12 @@ class JugarController extends Controller
 								'n' => $this->_nivel,
 								'pn' => $this->_preguntan,
 								'pr' => $this->_puntosr,
-								'pt' => $this->_puntost ) );
+								'pt' => $this->_puntost,
+								'a'	 => $this->_ayudas ) );
 	    if($this->_situacion == 6 || $this->_situacion == 4) $this->limpiar_sesion();
 	    Yii::app()->end();
 
-	}
+	}//responder
 
 	protected function cargar_pregunta($pregunta_id = 0)
 	{
@@ -227,12 +281,14 @@ class JugarController extends Controller
 
 			//3. Verifico el  número de rondas que ha jugado hoy para que no juegue más de la cuenta
 			$rondasdia = Ronda::model()->getRondasDia( $this->_jugador_id );
-			if($rondasdia >= Yii::app()->params['rondasxdia'])
+			$n_rondasdia = count($rondasdia);
+			if($n_rondasdia >= Yii::app()->params['rondasxdia'])
 			{
 				Yii::app()->user->setFlash('error', "Ya has jugado más de " . Yii::app()->params['rondasxdia'] . ' veces el día de hoy, vuelve mañana para que sigas acumulando puntos.');
 				$this->redirect('puntajes');
 				Yii::app()->end();
 			}
+
 
 			//Verifico el nivel para actualizar el tiempo de cada pregunta
 
@@ -241,6 +297,7 @@ class JugarController extends Controller
 			$ronda = new Ronda;
 			Yii::app()->session['ronda'] 		= $this->_ronda 	= $ronda->iniciarRonda( $this->_jugador_id );
 			Yii::app()->session['preguntas']	= $this->_preguntas = array();
+			Yii::app()->session['ayudas']		= $this->_ayudas 	= AyudaXRonda::model()->getAyudasDia($rondasdia);
 			Yii::app()->session['preguntan']	= $this->_preguntan = 0;
 			Yii::app()->session['preguntaid']	= $this->_preguntaid= 0;
 			Yii::app()->session['nivel'] 		= $this->_nivel 	= 1;
@@ -262,6 +319,7 @@ class JugarController extends Controller
 			$this->_puntosr	 	= Yii::app()->session['puntosr'];
 			$this->_puntost	 	= Yii::app()->session['puntost'];
 			$this->_situacion	= Yii::app()->session['situacion'];
+			$this->_ayudas		= Yii::app()->session['ayudas'];
 
 		}
 	}//verificar_sesion
@@ -280,6 +338,7 @@ class JugarController extends Controller
 			Yii::app()->session['puntosr'] 		= $this->_puntosr 	= 0;
 			Yii::app()->session['puntost'] 		= $this->_puntost 	= 0;
 			Yii::app()->session['situacion']	= $this->_situacion = 0;
+			Yii::app()->session['ayudas']		= $this->_ayudas 	= array();
 			/*Yii::app()->session->clear();
 			Yii::app()->session->destroy();*/
 			

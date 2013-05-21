@@ -1,7 +1,7 @@
 <?php
 /* @var $this JuugarController */
 Yii::app()->clientScript->registerCoreScript('jquery'); 
-Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/storage.min.js', CClientScript::POS_HEAD);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/effects.js', CClientScript::POS_HEAD);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/juego.js', CClientScript::POS_HEAD);
 ?>
 <p id="estado">

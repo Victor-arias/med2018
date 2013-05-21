@@ -128,9 +128,9 @@ class Ronda extends CActiveRecord
 		$a = new CDbCriteria;
 
 		$a->addCondition('jugador_id = '. $jugador_id);
-		//$a->addCondition('DATE(fecha)='. date('Y-m-d'));
+		$a->addCondition('DATE(fecha)=DATE(NOW())');
 		
-		return $this->count($a);
+		return $this->findAll($a);
 
 	}
 
