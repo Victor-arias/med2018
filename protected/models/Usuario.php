@@ -109,7 +109,7 @@ class Usuario extends CActiveRecord
 		return md5($password . $this->sal) === $this->password;
 	}
 
-	public function verificarLlave($llave_activacion)
+	public function validarToken($llave_activacion)
 	{
 		$existe = $this->find(
 			array(
@@ -120,13 +120,20 @@ class Usuario extends CActiveRecord
 		);
 		if($existe)
 		{
-			$existe->updateByPk($existe->id, array('llave_activacion' => '', 'estado' => 1));
+			$existe->findByPk($existe->id/*, array('llave_activacion' => '', 'estado' => 1)*/);
 			return $existe;
 		}
 		else
 			return false;
 		
 
+	}
+
+	public function actualizarClave($usuario_id)
+	{
+		$this->password = md5($this->password . $this->sal);
+		$this->updateByPk( $usuario_id, array('password' => $this->password, 'llave_activacion' => '', 'estado' => 1) );
+		return true;
 	}
 
 	protected function beforeSave()

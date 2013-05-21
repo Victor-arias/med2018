@@ -130,18 +130,59 @@ class SiteController extends Controller
 		$verificar = Usuario::model()->verificarLlave($llave_activacion);
 		if($verificar)
 		{
-			$usuario = new Usuario;
-			$loginForm = new LoginForm;
-			//$jugador = Jugador::model()->findByAttributes('usuario_id = ' . $verificar->id);
 			$mensaje = 'correcto';
 			//FALTA ENVIAR CORREO
 		}else{
 			$mensaje = 'fallido';
 			//FALTA MENSAJE DE FALLA
-			$jugador = array();
 		}
 			
-		$this->render('verificar', array('mensaje' => $mensaje, 'jugador' => $jugador));
+		$this->render('verificar', array('mensaje' => $mensaje));
+	}
+
+	public function actionRecuperarContrasena()
+	{
+		$model = new RecuperarForm;
+
+		if(isset($_POST['RecuperarForm']))
+		{
+			$model->attributes = $_POST['RecuperarForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->generarToken())
+				$this->render('recuperar-mensaje', array('mensaje' => 'Por favor revisa tu correo electrónico'));
+			else
+				$this->render('recuperar',array('model'=>$model));
+		}else{
+			$this->render('recuperar',array('model'=>$model));
+		}
+		
+	}
+
+	public function actionValidarIdentidad($llave_activacion)
+	{
+		
+		
+		$recuperar = Usuario::model()->validarToken($llave_activacion);
+		if($recuperar)
+		{
+			$model = new Usuario;
+			if(isset($_POST['Usuario']))
+			{
+				$model->attributes = $_POST['Usuario'];
+				$model->actualizarClave($recuperar->id);
+				$this->render('recuperar-mensaje', array('mensaje' => 'Tu nueva contraseña se ha guardado'));
+			}
+			else
+			{
+				$this->render('form-recuperar', array('model' => $model));
+			}
+		}
+		else
+		{
+			$this->render('recuperar-mensaje', array('mensaje' => 'Ooops!'));
+		}
+		
+		
 	}
 
 	private function verificarCorreo($datos)

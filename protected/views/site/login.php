@@ -39,6 +39,10 @@ $this->pageTitle= 'Iniciar sesión - ' .Yii::app()->name;
 		<?php echo CHtml::submitButton('Iniciar sesión', array('class' =>'btn')); ?>
 	</div>
 
+	<div class="row">
+		<?php echo CHtml::link('¿Olvidaste la contraseña?', array('/recuperar-contrasena'), array('class' => 'recuperar' )); ?>
+	</div>
+
 <?php $this->endWidget(); ?>
 </div><!-- form -->
 <div id="right-content">
