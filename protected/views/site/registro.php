@@ -3,7 +3,7 @@ Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/i18n/jquery.ui.datepicker-es.js', CClientScript::POS_HEAD);
 Yii::app()->clientScript->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');
 Yii::app()->clientScript->registerScript('datepicker', 
-	'$(".datepicker").datepicker({dateFormat: "yy-mm-dd", yearRange: "1998:2003", minDate: new Date(1999, 5, 21), maxDate: new Date(2003, 6, 11), changeMonth: true, changeYear: true}, $.datepicker.regional[ "es" ]);', 
+	'$(".datepicker").datepicker({dateFormat: "yy-mm-dd", yearRange: "1999:2003", minDate: new Date(1999, 4, 21), maxDate: new Date(2003, 5, 11), changeMonth: true, changeYear: true}, $.datepicker.regional[ "es" ]);', 
 	CClientScript::POS_READY);
 ?>
 <div id="content">

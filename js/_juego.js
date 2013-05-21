@@ -20,8 +20,14 @@ $(function() {
 	var rd = $('#rd');
 
 	var mensaje = $('#mensaje');
-	var mp 		= $('#mensaje p');
+	var mp 		= $('#mensaje div');
 	var mb 		= $('#mensaje a');
+
+	$("#cargando").on("ajaxStart", function(){
+	    $(this).show(); // this hace referencia a la div con la imagen.
+	}).on("ajaxStop", function(){
+	    $(this).hide();
+	});
 
 	//Eventos
 	$(document).on('click', '.mb-cp', cargar_pregunta);
@@ -100,32 +106,32 @@ $(function() {
 		switch(caso)
 		{
 			case 1://inicio
-				mp.html('<p>Para poder iniciar el juego necesitas recordar esto:</p><ul><li>Tienes solo dos oportunidades para jugar diariamente.</li><li>Acumulas puntos por cada respuesta correcta que tengas.</li><li>Las preguntas son sobre: Medellín, los deportes de los Juegos Olímpicos Juveniles y la importancia de la convivencia.</li><!--<li>Si la pregunta está muy difícil puedes utilizar 3 ayudas: cambiar la pregunta, pedir 10 segundos más para responderla o eliminar dos de las posibles respuestas.</li>--><li>El tiempo de la primera pregunta empieza a correr cuando presiones el botón “jugar”.</li></ul>');
+				mp.html('<h3>Para poder iniciar el juego necesitas recordar esto:</h3><ul><li>Tienes solo dos oportunidades para jugar diariamente.</li><li>Acumulas puntos por cada respuesta correcta que tengas.</li><li>Las preguntas son sobre: Medellín, los deportes de los Juegos Olímpicos Juveniles y la importancia de la convivencia.</li><!--<li>Si la pregunta está muy difícil puedes utilizar 3 ayudas: cambiar la pregunta, pedir 10 segundos más para responderla o eliminar dos de las posibles respuestas.</li>--><li>El tiempo de la primera pregunta empieza a correr cuando presiones el botón “jugar”.</li></ul>');
 				mb.text('Jugar');
 				mb.addClass('mb-cp');
 				break;
 			case 3: //correcto
-				mp.text('Respuesta correcta');
+				mp.html('<h3>¡La respuesta es correcta!</h3>');
 				mb.text('Ir a la siguiente pregunta');
 				mb.addClass('mb-cp');
 				break;
 			case 4: //incorrecto
-				mp.text('Respuesta equivocada');
-				mb.text('Salir del juego');
+				mp.html('<h3>¡Esta no era la respuesta!</h3><p>Ha terminado esta ronda</p>');
+				mb.text('Salir de esta ronda');
 				mb.attr('href', 'puntajes');
 				break;
 			case 5:
-				mp.text('Respuesta correcta, avanzas al siguiente nivel');
+				mp.html('<h3>¡La respuesta es correcta, además avanzas al siguiente nivel!</h3>');
 				mb.text('Ir a la pregunta del siguiente nivel');
 				mb.addClass('mb-cp');
 				break;
 			case 6:
-				mp.text('Has terminado esta ronda');
+				mp.html('<h3>¡Felicitaciones, has terminado esta ronda!</h3>');
 				mb.text('Ver la tabla de puntajes');
 				mb.attr('href', 'puntajes').removeAttr('class');
 				break;
 			case 7:
-				mp.text('Se agotó el tiempo, ha finalizado esta ronda');
+				mp.html('<h3>Se agotó el tiempo, ha finalizado esta ronda</h3>');
 				mb.text('Ver la tabla de puntajes');
 				mb.attr('href', 'puntajes').removeAttr('class');
 				break;
@@ -211,10 +217,11 @@ $(function() {
 		$.post('jugar/responder', {r: respuesta_id, t: TotalSeconds}, mostrar_respuesta);
 		localStorage.removeItem('t');
 		clearTimeout(TimeO);
-		ra.text('').removeAttr('class');
-		rb.text('').removeAttr('class');
-		rc.text('').removeAttr('class');
-		rd.text('').removeAttr('class');
+		ra.removeAttr('class');
+		rb.removeAttr('class');
+		rc.removeAttr('class');
+		rd.removeAttr('class');
+		$('#'+id).addClass('active');
 		e.preventDefault();
 	}//responder
 
@@ -248,7 +255,7 @@ $(function() {
 		localStorage.setItem('t', TotalSeconds);
 		var Seconds = TotalSeconds;
 		var TimeStr = LeadingZero(Seconds);
-		Timer.innerHTML = TimeStr + ' segundos';
+		Timer.innerHTML = TimeStr;
 	}
 
 	function LeadingZero(Time) {

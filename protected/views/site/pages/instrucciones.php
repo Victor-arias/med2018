@@ -39,11 +39,11 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 
 <h2>Mecánica del juego</h2>
 
-<p>Si ya estás inscrito, tendrás cada día una oportunidad de participar, entre más días juegues, más oportunidades tendrás de ganar puntos y avanzar en el juego.</p>
+<p>Si ya estás inscrito, tendrás cada día dos oportunidades de participar, entre más días juegues, más oportunidades tendrás de ganar puntos y avanzar en el juego.</p>
 
 <p>Será un reto de conocimiento y de rapidez, te haremos preguntas que debes responder antes de que se te acabe el tiempo. A medida que vas respondiendo correctamente los retos, irás ganando puntos y avanzando de nivel.</p>
 
-<p>Son 5 niveles, cada uno tiene cuatro preguntas en total. Mira los putos que necesitas para avanzar en el juego: </p>
+<p>Son 5 niveles, cada uno tiene cuatro preguntas en total. Mira los puntos que ganarás por responder cada pregunta en los diferentes niveles. </p>
 <ul>
 	<li>Nivel 1: 10 puntos.</li>
 	<li>Nivel 2: 30 puntos.</li>
@@ -52,7 +52,7 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 	<li>Nivel 5: 200 puntos.</li>
 </ul>
 
-<!--<p>No te preocupes si en algún momento no sabes la respuesta a alguna pregunta, pues tendrás varias ayudas que podrás utilizar: </p>
+<!--<p>No te preocupes si en algún momento no sabes la respuesta a alguna pregunta, pues tendrás varias ayudas durante el juego, pero utilízalas con cuidado porque sólo se activarán una vez por día: </p>
 <ul>
 	<li>10 segundos más</li>
 	<li>eliminar 2 respuestas erradas </li>
@@ -69,5 +69,6 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 
 <h2>Premio </h2>
 
-<p>El premio es un viaje con todo pago a Suiza para el niño ganador y un acompañante, ellos serán una de las primeras personas en saber si Medellín será la sede de los Juegos Olímpicos de la Juventud 2018 ¡Vamos por el sueño olímpico!</p>
+<p>El premio es un viaje con todo pago a Suiza para el niño y la niña ganadores y sus acompañantes, ellos serán una de las primeras personas en saber si Medellín será la sede de los Juegos Olímpicos de la Juventud 2018 ¡Vamos por el sueño olímpico!
+</p>
 </div>

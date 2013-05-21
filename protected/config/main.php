@@ -105,7 +105,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'victor.arias@telemedellin.tv',
-		'rondasxdia'=>2,
+		'rondasxdia'=>20,
 		'preguntasxnivel' => 4,
 	),
 );

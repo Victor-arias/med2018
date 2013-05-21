@@ -5,7 +5,7 @@ $this->pageTitle = 'Ranking - '.Yii::app()->name;
 <div id="content-ranking">
 	<h1>Puntajes</h1>
 	<?php if( Yii::app()->user->hasFlash('error') ):?>
-		<div><?php echo Yii::app()->user->getFlash('error'); ?></div>
+		<div class="flash-notice"><?php echo Yii::app()->user->getFlash('error'); ?></div>
 	<?php endif;?>
 	<div id="ninos">
 		<div id="star-left"></div>
