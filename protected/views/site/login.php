@@ -6,9 +6,8 @@
 $this->pageTitle= 'Iniciar sesión - ' .Yii::app()->name;
 ?>
 
-<h1>Iniciar sesión</h1>
-
-<div class="form">
+<div class="form login">
+	<h1>Iniciar sesión</h1>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableAjaxValidation'=>true,
@@ -40,7 +39,7 @@ $this->pageTitle= 'Iniciar sesión - ' .Yii::app()->name;
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Iniciar sesión'); ?>
+		<?php echo CHtml::submitButton('Iniciar sesión', array('class' =>'btn')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

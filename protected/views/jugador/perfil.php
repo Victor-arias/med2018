@@ -25,7 +25,7 @@
 	<p>Teléfono fijo: <?php echo $jugador->telefono ?></p>
 </div>
 <div id="right-content">
-	<?php echo CHtml::link( '¿Listo para ser uno de los niños que irá a Suiza? ¡Vamos a jugar!', array('/jugar'), array('class' => 'juega' ) ); ?>
+	<?php echo CHtml::link( '¿Listo para ser uno de los niños que irá a Suiza? <span>¡Vamos a jugar!</span>', array('/jugar'), array('class' => 'juega' ) ); ?>
 	<div id="estadisticas">
 		<h3>Estadísticas</h3>
 		<p>Puntaje total <?php echo $jugador->puntaje ?></p>

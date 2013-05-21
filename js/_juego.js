@@ -23,6 +23,10 @@ $(function() {
 	var mp 		= $('#mensaje div');
 	var mb 		= $('#mensaje a');
 
+	var segundos = $('.segundos');
+	var erradas = $('.erradas');
+	var avanza = $('.avanza');
+
 	$("#cargando").on("ajaxStart", function(){
 	    $(this).show(); // this hace referencia a la div con la imagen.
 	}).on("ajaxStop", function(){
