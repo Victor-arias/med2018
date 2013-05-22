@@ -109,6 +109,26 @@ class Usuario extends CActiveRecord
 		return md5($password . $this->sal) === $this->password;
 	}
 
+	public function verificarLlave($llave_activacion)
+	{
+		$existe = $this->find(
+			array(
+				'select' 	=> 'id',
+				'condition' => 'llave_activacion=:llave_activacion',
+				'params'	=> array(':llave_activacion' => $llave_activacion),
+			)
+		);
+		if($existe)
+		{
+			$existe->updateByPk($existe->id, array('llave_activacion' => '', 'estado' => 1));
+			return $existe;
+		}
+		else
+			return false;
+		
+
+	}
+
 	public function validarToken($llave_activacion)
 	{
 		$existe = $this->find(

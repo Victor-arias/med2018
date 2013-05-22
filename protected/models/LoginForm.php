@@ -58,7 +58,7 @@ class LoginForm extends CFormModel
 		        }
 		        else
 		        {
-		        	$this->addError('password','Incorrect username or password.');
+		        	$this->addError('password','El correo o la contraseña no están bien');
 		        }
 			}
 				

@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScript('datepicker',
 		'focus'=>array($usuario,'correo'),
 	));
 	?>
-	<?php echo $activeform->errorSummary(array($usuario, $jugador)); ?>
+	<?php echo $activeform->errorSummary(array($usuario, $jugador), '', '', array('class' => 'flash-notice')); ?>
 
 	<div id="subtitulo">
 		<h2>Datos de acceso</h2>
@@ -30,7 +30,6 @@ Yii::app()->clientScript->registerScript('datepicker',
 	<div class="row">
 		<?php echo $activeform->label($usuario,'correo'); ?>
 		<?php echo $activeform->emailField($usuario,'correo',array('size'=>60, 'maxlength'=>100)); ?> 
-		<?php echo $activeform->error($usuario,'correo'); ?>
 	</div>
 
 	<div class="row">
@@ -44,29 +43,24 @@ Yii::app()->clientScript->registerScript('datepicker',
 	<div class="row">
 			<?php echo $activeform->label($jugador,'nombre'); ?>
 			<?php echo $activeform->textField($jugador,'nombre',array('size'=>60,'maxlength'=>255)); ?>
-			<?php echo $activeform->error($jugador,'nombre'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $activeform->label($jugador,'documento'); ?>
 			<?php echo $activeform->textField($jugador,'documento',array('size'=>45,'maxlength'=>45)); ?>
-			<?php echo $activeform->error($jugador,'documento'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $activeform->label($jugador,'fecha_nacimiento'); ?>
 			<?php echo $activeform->textField($jugador,'fecha_nacimiento', array('class' => 'datepicker')); ?>
-			<?php echo $activeform->error($jugador,'fecha_nacimiento'); ?>
 		</div>
 		<div class="row">
 			<?php echo $activeform->label($jugador,'colegio'); ?>
 			<?php echo $activeform->textField($jugador,'colegio', array('size'=>45,'maxlength'=>255)); ?>
-			<?php echo $activeform->error($jugador,'colegio'); ?>
 		</div>
 		<div class="row">
 			<?php echo $activeform->label($jugador,'sexo'); ?>
 			<?php echo $activeform->radioButtonList($jugador,'sexo', array('M' => 'Niño', 'F' => 'Niña'), array('labelOptions' => array('class' => 'nino-pic'), 'separator'=>'' ) ); ?>
-			<?php echo $activeform->error($jugador,'sexo'); ?>
 		</div>
 
 		<div id="subtitulo">
@@ -77,31 +71,26 @@ Yii::app()->clientScript->registerScript('datepicker',
 		<div class="row">
 			<?php echo $activeform->label($jugador,'nombre_adulto'); ?>
 			<?php echo $activeform->textField($jugador,'nombre_adulto',array('size'=>60,'maxlength'=>255)); ?>
-			<?php echo $activeform->error($jugador,'nombre_adulto'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $activeform->label($jugador,'documento_adulto'); ?>
 			<?php echo $activeform->textField($jugador,'documento_adulto',array('size'=>45,'maxlength'=>45)); ?>
-			<?php echo $activeform->error($jugador,'documento_adulto'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $activeform->label($jugador,'parentesco_id'); ?>
 			<?php echo $activeform->dropDownList($jugador,'parentesco_id', CHtml::listData(Parentesco::model()->findAll(), 'id', 'nombre')/*, array('empty'=>'select Type')*/); ?>
-			<?php echo $activeform->error($jugador,'parentesco_id'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $activeform->label($jugador,'correo_adulto'); ?>
 			<?php echo $activeform->emailField($jugador,'correo_adulto',array('size'=>60,'maxlength'=>100)); ?>
-			<?php echo $activeform->error($jugador,'correo_adulto'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $activeform->label($jugador,'telefono'); ?>
 			<?php echo $activeform->textField($jugador,'telefono',array('size'=>45,'maxlength'=>45)); ?>
-			<?php echo $activeform->error($jugador,'telefono'); ?>
 		</div>
 
 		<div class="row buttons submit">

@@ -28,15 +28,15 @@
 	<?php echo CHtml::link( '¿Listo para ser uno de los niños que irá a Suiza? <span>¡Vamos a jugar!</span>', array('/jugar'), array('class' => 'juega' ) ); ?>
 	<div id="estadisticas">
 		<h3>Estadísticas</h3>
-		<p>Puntaje total <?php echo $jugador->puntaje ?></p>
-		<p>Rondas jugadas <?php echo $estadisticas['rondas'] ?></p>
-		<p>Tiempo total de juego <?php echo $estadisticas['tiempo'] ?> horas</p>
-		<p>Total de preguntas resueltas <?php echo $estadisticas['preguntas'] ?></p>
+		<p>Puntaje total <span><?php echo $jugador->puntaje ?></span></p>
+		<p>Rondas jugadas <span><?php echo $estadisticas['rondas'] ?></span></p>
+		<p>Tiempo total de juego <span><?php echo $estadisticas['tiempo'] ?></span></p>
+		<p>Total de preguntas resueltas <span><?php echo $estadisticas['preguntas'] ?></span></p>
 
-		<p>Fecha última ronda <?php echo $estadisticas['fecha_ultima'] ?></p>
-		<p>Puntaje última ronda <?php echo $estadisticas['puntos_ultima'] ?></p>
-		<p>Tiempo última ronda <?php echo $estadisticas['tiempo_ultima'] ?> minutos</p>
-		<p>Preguntas resueltas última ronda <?php echo $estadisticas['preguntas_ultima'] ?></p>
+		<p>Fecha última ronda <span><?php echo $estadisticas['fecha_ultima'] ?></span></p>
+		<p>Puntaje última ronda <span><?php echo $estadisticas['puntos_ultima'] ?></span></p>
+		<p>Tiempo última ronda <span><?php echo $estadisticas['tiempo_ultima'] ?></span></p>
+		<p>Preguntas última ronda <span><?php echo $estadisticas['preguntas_ultima'] ?></span></p>
 	</div>
 </div>
 </div>
