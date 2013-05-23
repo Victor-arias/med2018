@@ -92,7 +92,9 @@ Yii::app()->clientScript->registerScript('datepicker',
 			<?php echo $activeform->label($jugador,'telefono'); ?>
 			<?php echo $activeform->textField($jugador,'telefono',array('size'=>45,'maxlength'=>45)); ?>
 		</div>
-
+		<div class="row">
+			<p>Antes de registrarte asegúrate de haber leído y estar de acuerdo con los <?php echo CHtml::link('términos y condiciones del concurso', array('/terminos-y-condiciones'), array('target' => '_blank'));?>.</p>
+		</div>
 		<div class="row buttons submit">
 			<?php echo CHtml::submitButton('Registro', array('class'=>'btn')); ?>
 		</div>

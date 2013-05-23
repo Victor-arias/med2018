@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl().'/js/juego
 		<a href="#" id="rb"></a>
 		<a href="#" id="rc"></a>
 		<a href="#" id="rd"></a>
-		<div id="logo-juego"></div>
+		<!--<div id="logo-juego"></div>-->
 	</div>
 	<div id="sidebar">
 		<p class="ayudas">Ayudas</p>

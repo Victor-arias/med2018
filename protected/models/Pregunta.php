@@ -146,7 +146,7 @@ class Pregunta extends CActiveRecord
 				array_push($preguntas, $pr[$i]->pregunta_id);*/
 
 
-		$max = $this->count();
+		$max = $this->count('nivel_id='.$nivel);
 		$offset = rand(0, $max-1);
 
 		$pcriteria 				= new CDbCriteria;

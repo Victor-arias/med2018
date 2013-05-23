@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' - Cómo participar';
+$this->pageTitle=Yii::app()->name . ' - ¿Cómo participar?';
 ?>
 <div id="instrucciones">
 <h1>¿Cómo participar?</h1>
@@ -52,7 +52,7 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 	<li>Nivel 5: 200 puntos.</li>
 </ul>
 
-<!--<p>No te preocupes si en algún momento no sabes la respuesta a alguna pregunta, pues tendrás varias ayudas durante el juego, pero utilízalas con cuidado porque sólo se activarán una vez por día: </p>
+<p>No te preocupes si en algún momento no sabes la respuesta a alguna pregunta, pues tendrás varias ayudas durante el juego, pero utilízalas con cuidado porque sólo se activarán una vez por día: </p>
 <ul>
 	<li>10 segundos más</li>
 	<li>eliminar 2 respuestas erradas </li>
@@ -60,7 +60,7 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 </ul>
 
 <p>Las ayudas las tendrás cada ronda de juego, o sea cada día que juegues. </p>
--->
+
 <p>Día a día acumularás más puntos y si logras acumular bastantes te verás de primero en la tabla de posiciones junto a los mejores. Tienes hasta el 10 de junio ¡no pares de jugar! </p>
 
 <h2>Ganadores</h2>
@@ -69,6 +69,6 @@ $this->pageTitle=Yii::app()->name . ' - Cómo participar';
 
 <h2>Premio </h2>
 
-<p>El premio es un viaje con todo pago a Suiza para el niño y la niña ganadores y sus acompañantes, ellos serán una de las primeras personas en saber si Medellín será la sede de los Juegos Olímpicos de la Juventud 2018 ¡Vamos por el sueño olímpico!
+<p>El premio es un viaje a Suiza para el niño y la niña ganadores y un acompañante mayor de edad para cada uno, ellos serán una de las primeras personas en saber si Medellín será la sede de los Juegos Olímpicos de la Juventud 2018 ¡Vamos por el sueño olímpico!</br>Puedes conocer que incluye el premio en este enlace: <a href="http://www.concursomedellin2018.com/premio">¿Qué te puedes ganar?</a>
 </p>
 </div>

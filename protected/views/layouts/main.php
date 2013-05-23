@@ -16,14 +16,14 @@
 	<link rel="icon" href="/images/favicon.ico" />
 	<!--[if LTE IE 8]>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/modernizr.custom.95570.js"></script>
-	<![endif] -->
+	<![endif]-->
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
 <header>
 	<div id="header-content">
-		<div id="logo"><?php echo CHtml::link( CHtml::encode('Viaja a Suiza con Medellín 2018'), CHtml::normalizeUrl('/') ); ?></div>
+		<div id="logo"><?php echo CHtml::link( CHtml::image(Yii::app()->request->baseUrl . '/images/logo.png', 'Viaja a Suiza con Medellín 2018', array('width' => 232, 'height' => 226)), CHtml::normalizeUrl('/') ); ?></div>
 		<div id="mainmenu">
 			<?php $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
@@ -36,7 +36,7 @@
 		<div id="share">
 			<ul>
 				<li><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div></li>
-				<li><a href="https://twitter.com/share" class="twitter-share-button" data-text="Estoy concursando por un viaje a Suiza con @Medellin2018yog ¡y tú también puedes participar!" data-hashtags="Medellìn2018" data-dnt="true">Tweet</a>
+				<li><a href="https://twitter.com/share" class="twitter-share-button" data-text="Estoy concursando por un viaje a Suiza con @Medellin2018yog ¡y tú también puedes participar!" data-hashtags="Medellín2018" data-dnt="true">Tweet</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
 			</ul>
 		</div>
@@ -63,7 +63,7 @@
 		<li><a class="mv" href="http://www.noviolenciamedellin.co/" target="_blank">Mayo por la vida</a></li>
 		<li><a class="al" href="http://www.medellin.gov.co" target="_blank">Alcaldía</a></li>
 	</ul>
-	<?php echo CHtml::link( 'Términos y condiciones', array('/terminos-y-condiciones'), array('class' => 'terminos' ) ); ?>
+	<?php echo CHtml::link( 'Términos y condiciones', array('/terminos-y-condiciones'), array('class' => 'terminos' ) ); ?> <span>contacto@concursomedellin2018.com</span>
 	</div>
 </footer>
 <div id="fb-root"></div>

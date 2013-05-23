@@ -10,7 +10,7 @@ $this->pageTitle = Yii::app()->name;
 	<div id="left-content">
 		<p class="titulo-video">En este video puedes ver cómo ser uno de los ganadores</p>
 
-		<iframe width="560" height="315" src="http://www.youtube.com/embed/qqwIr6XfS9A?rel=0" frameborder="0" allowfullscreen></iframe>
+		<iframe width="560" height="315" src="http://www.youtube.com/embed/ZE7CZzmlb1s?rel=0" frameborder="0" allowfullscreen></iframe>
 	</div>
 	<div id="right-content">
 		<ul>

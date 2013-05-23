@@ -1,8 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' - Términos y condiciones de uso';
+$this->pageTitle=Yii::app()->name . ' - Términos y condiciones del concurso';
 ?>
+<div id="terminos">
 <h1>TERMINOS Y CONDICIONES DEL CONCURSO “VIAJA A SUIZA CON MEDELLIN 2018” </h1>
 
 <p>Los menores que pretendan inscribirse en el concurso “Viaja a Suiza con Medellín 2018” (en adelante el “concurso”) deberán contar con la autorización de uno de sus padres o tutor para poder participar en el concurso, esta autorización, se entiende prestada con el diligenciamiento de los datos en el formulario de inscripción. Los padres o tutores asumen la responsabilidad por la participación de los menores y las acciones que estos realicen durante el concurso. </p>
@@ -14,3 +15,4 @@ $this->pageTitle=Yii::app()->name . ' - Términos y condiciones de uso';
 <p>En caso de que se presente un empate en los puntajes finales tanto en la elección del niño como de la niña ganadores este se decidirá por sorteo con balota.</p>
 <p>Si por cualquier circunstancia el niño o niña ganadora no hicieran uso del premio este será entregado al segundo puesto en la categoría respectiva, ya que el premio es personal e intransferible, por lo tanto no podrá ser cedido. </p>
 <p>Cuando ocurran circunstancias imprevistas que constituyan caso fortuito, fuerza mayor o similar que los justifiquen, la organización del concurso podrá suspender, cancelar o modificar parcialmente los presentes términos y condiciones sin necesidad de previo aviso de tal circunstancia a los participantes; en ningún caso el ejercicio de tal derecho por parte de la organización del concurso dará derecho a los participantes o sus representantes a reclamación alguna.</p>
+</div>

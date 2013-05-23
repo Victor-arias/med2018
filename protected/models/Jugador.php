@@ -88,19 +88,19 @@ class Jugador extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'nombre' => 'Nombre',
-			'documento' => 'Documento',
+			'nombre' => 'Nombre completo',
+			'documento' => 'Documento de identidad',
 			'usuario_id' => 'Usuario',
 			'sexo' => 'Sexo',
-			'fecha_nacimiento' => 'Fecha Nacimiento',
-			'colegio' => 'Colegio',
-			'nombre_adulto' => 'Nombre Adulto',
-			'documento_adulto' => 'Documento Adulto',
-			'correo_adulto' => 'Correo Adulto',
-			'telefono' => 'Telefono',
+			'fecha_nacimiento' => 'Fecha de nacimiento',
+			'colegio' => 'Colegio de Medellín',
+			'nombre_adulto' => 'Nombre adulto responsable',
+			'documento_adulto' => 'Documento adulto responsable',
+			'correo_adulto' => 'Correo adulto responsable',
+			'telefono' => 'Teléfono',
 			'parentesco_id' => 'Parentesco',
-			'fecha_registro' => 'Fecha Registro',
-			'fecha_actualizacion' => 'Fecha Actualizacion',
+			'fecha_registro' => 'Fecha de registro',
+			'fecha_actualizacion' => 'Fecha de actualizacion',
 			'puntaje' => 'Puntaje',
 		);
 	}
@@ -168,6 +168,7 @@ class Jugador extends CActiveRecord
 		 
 		 $c = new CDbCriteria;
 		 $c->addCondition('puntaje > 0');
+		 $c->limit = 10;
 		 $c->order = 'puntaje DESC';
 		 $ninos = $this->findAllByAttributes(array('sexo' => 'M'), $c);
 		 $ninas = $this->findAllByAttributes(array('sexo' => 'F'), $c);

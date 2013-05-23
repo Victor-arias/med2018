@@ -1,4 +1,5 @@
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block}
+a{color: #3090c3; font-family: Arial, sans-serif;, text-decoration: none;}
 body {
 	color: #7d7d7d;
 	font-family: Verdana, sans-serif;
@@ -22,11 +23,11 @@ header {
 	margin: auto;
 }
 #logo {
-	background-image: url("../images/logo.png"); 
+	/*background-image: url("../images/logo.png"); */
 	width: 230px;
 	height: 225px;
 	float: left;
-	text-indent: -9999px;
+	/*text-indent: -9999px;*/
 }
 #logo a {
 	width: 230px;
@@ -135,7 +136,7 @@ header {
 	background-color: #fff;
 	padding-top: 40px;
 	padding-right: 10px;
-	padding-bottom: 50px;
+	padding-bottom: 70px;
 	padding-left: 10px;
 	overflow: auto;
 	-webkit-box-shadow: 0px 0px 9px rgba(50, 50, 50, 1);
@@ -226,10 +227,10 @@ a.juega {
 	font-size: 25px;
 	text-decoration: none;
 	color: #fff;
-	width: 322px;
+	width: 317px;
 	height: 212px;
 	float: right;
-	padding: 15px 0 0 20px;
+	padding: 15px 5px 0 20px;
 	margin-top: 10px;
 }
 a.juega:hover {
@@ -245,7 +246,7 @@ footer {
 	background-repeat: no-repeat;
 	background-position: center;
 	clear: both;
-	margin-top: -50px;
+	margin-top: -58px;
 	position: relative;
 }
 #footer-content {
@@ -269,6 +270,11 @@ footer {
 	list-style: none;
 	float: left;
 	margin: 0 22px 0 22px;
+}
+#footer-content > span{
+	font-size: .7em;
+	padding-bottom: 5px;
+	vertical-align: top;
 }
 a.tm {
 	background-image: url("../images/telemedellin_pie.jpg");
@@ -305,7 +311,7 @@ a.terminos {
 	font-size: 14px;
 	color: #3090c3;
 	display: block;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 a.terminos:hover {
 	text-decoration: underline;
@@ -533,7 +539,8 @@ div.form label {
 	float: left;
 }
 div.form label small {
-	font-size: 12px;
+	display: block;
+	font-size: 14px;
 }
 div.form input,
 div.form select {
@@ -703,6 +710,9 @@ p.puntaje-general {
 	font-size: 1.6em;
 	margin: .5em;
 }
+#mensaje p{
+	font-family: Verdana, sans-serif;
+}
 #mensaje li{
 	font-size: 1.3em;
 	list-style-image: url("../images/star-tip.png");
@@ -714,15 +724,18 @@ p.puntaje-general {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	color: #FFF;
-	padding: 5px;
+	padding: 10px;
 	text-decoration: none;
+}
+#mensaje a:hover{
+	background: #135184;
 }
 #pregunta {
 	width: 625px;
 	height: auto;
-	background-image: url("../images/bg_1.gif");
-	background-repeat: no-repeat;
-	background-position: bottom;
+	background-image: url("../images/spark.png"), url("../images/bg_1.gif");
+	background-repeat: no-repeat, no-repeat;
+	background-position: center 82% , left bottom;
 	float: left;
 	padding-top: 85px;
 }
@@ -734,7 +747,7 @@ p.puntaje-general {
 	margin-bottom: 0px;
 	padding-top: 5px;
 	background-color: #af2a57;
-	font-family: 'Gochi Hand';
+	font-family: 'Gochi Hand', sans-serif;
 	font-size: 20px;
 	color: #fff;
 	text-align: center;
@@ -762,24 +775,26 @@ p.puntaje-general {
 	margin-right: auto;
 	margin-left: auto;
 	background-color: #3c4647;
-	font-family: 'Gochi Hand';
+	font-family: 'Gochi Hand', sans-serif;
 	text-align: center;
 	color: #fff;
 	font-size: 20px;
 }
 #pregunta a {
-	width: 268px;
-	height: 70px;
-	padding-top: 52px;
-	font-family: 'Gochi Hand';
+	width: 260px;
+	height: 90px;
+	padding-top: 32px;
+	font-family: 'Gochi Hand', sans-serif;
 	font-size: 20px;
 	color: #fff;
 	text-decoration: none;
+	letter-spacing: 1px;
 }
 a#ra {
 	float: left;
 	background-image: url("../images/left-resp.png");
 	padding-left: 20px;
+	padding-right: 8px;
 
 }
 a:hover#ra {
@@ -793,6 +808,7 @@ a#rb {
 	background-image: url("../images/right-resp.png");
 	text-align: right;
 	padding-right: 20px;
+	padding-left: 8px;
 }
 a:hover#rb {
 	background-position: 0 -115px;
@@ -805,6 +821,7 @@ a#rc {
 	clear: both;
 	background-image: url("../images/left-resp.png");
 	padding-left: 20px;
+	padding-right: 8px;
 }
 a:hover#rc {
 	background-position: 0 -110px;
@@ -817,6 +834,7 @@ a#rd {
 	background-image: url("../images/right-resp.png");
 	text-align: right;
 	padding-right: 20px;
+	padding-left: 8px;
 }
 a:hover#rd {
 	background-position: 0 -115px;
@@ -824,7 +842,7 @@ a:hover#rd {
 a#rd.active {
 	background-position: 0 -232px;
 }
-#logo-juego {
+/*#logo-juego {
 	background-image: url("../images/spark.png");
 	background-repeat: no-repeat;
 	position: absolute;
@@ -832,7 +850,7 @@ a#rd.active {
 	height: 95px;
 	top: 353px;
 	left:  256px;
-}
+}*/
 #sidebar {
 	float: right;
 	width: 280px;
@@ -843,7 +861,7 @@ a#rd.active {
 .ayudas {
 	width: 100%;
 	background-color: #5fa6b8;
-	font-family: 'Gochi Hand';
+	font-family: 'Gochi Hand', sans-serif;
 	font-size: 55px;
 	color: #fff;
 	text-align: center;
@@ -855,7 +873,7 @@ a#rd.active {
 	margin-right: auto;
 	padding-left: 85px;
 	display: block;
-	font-family: 'Gochi Hand';
+	font-family: 'Gochi Hand', sans-serif;
 	font-size: 20px;
 	color: #fff;
 	text-decoration: none;
@@ -920,7 +938,7 @@ h1,
 	font-size: 30px;
 	color: #4fa1b7;
 	margin: 20px 0 -10px 0;
-	padding-top: 30px;
+	padding-top: 10px;
 }
 #instrucciones p,
 #instrucciones li
@@ -984,24 +1002,28 @@ h1,
 }
 /* ------------------ Premio -----------------*/
 #content-premio {
-	width: 900px;
+	width: 800px;
 	margin-left: auto;
 	margin-right: auto;
 }
-#content-premio h1 {
+#content-premio h1,
+#terminos h1 {
 	font-family: 'Gochi Hand';
-	font-size: 55px;
+	font-size: 45px;
 	color: #63426d;
+	margin: 15px 0;
 }
-#content-premio p {
-	font-family: 'Gochi Hand';
-	font-size: 25px;
-	color: #63426d;
-	margin-bottom: 0px;
+#content-premio h2 {
+	color: #4fa1b7;
+	font-family: 'Gochi Hand', sans-serif;
+	font-size: 30px;
+	margin: 20px 0 -10px 0;
+	padding-top: 30px;
 }
+#content-premio p,
 #content-premio li {
-	font-family: 'Gochi Hand';
-	font-size: 20px;
+	font-family: Verdana, sans-serif;
+	color: #7d7d7d;
 }
 
 .form.login{
@@ -1014,6 +1036,15 @@ h1,
 
 #estadisticas{
 	float: right;
+}
+
+#terminos 
+{
+	margin: auto;
+	width: 800px;
+}
+#terminos h1{
+	font-size: 43px;
 }
 
 div.flash-error, div.flash-notice, div.flash-success
