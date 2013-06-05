@@ -167,6 +167,18 @@ class JugarController extends Controller
 	{
 		$this->verificar_sesion();
 		$this->_situacion = 7;//7. Tiempo
+		$nivel = Nivel::model()->findByPk($this->_nivel);
+		$ronda = Ronda::model()->findByPk($this->_ronda);
+	    $puntosr = $ronda->puntos;
+
+    	$a = array(
+				'tiempo' 	=> ( $ronda->tiempo + $nivel->tiempo ), 
+				'preguntas' => $this->_preguntan, 
+				'nivel' 	=> $this->_nivel, 
+				'puntos' 	=> $puntosr
+			);
+	    	    	
+	    $ronda->updateByPk($this->_ronda, $a);
 		header('Content-Type: application/json; charset="UTF-8"');
 	    echo CJSON::encode( array('s' => $this->_situacion,
 								'n' => $this->_nivel,
@@ -245,6 +257,7 @@ class JugarController extends Controller
 	    else
 	    {
 	    	$situacion = 4;//4. Respuesta mala
+	    	$nivel = Nivel::model()->findByPk($this->_nivel);
 			$ronda = Ronda::model()->findByPk($this->_ronda);
 	    	$puntosr = $ronda->puntos;
 	    	if($tiempo < 0)
@@ -304,13 +317,21 @@ class JugarController extends Controller
 			//3. Verifico el  número de rondas que ha jugado hoy para que no juegue más de la cuenta
 			$rondasdia = Ronda::model()->getRondasDia( $this->_jugador_id );
 			$n_rondasdia = count($rondasdia);
-			if($n_rondasdia >= Yii::app()->params['rondasxdia'])
+
+			if($this->_jugador_id != 117)
+			{
+				if( $n_rondasdia >= Yii::app()->params['rondasxdia'] )
+				{
+					Yii::app()->user->setFlash('error', "Ya has jugado " . Yii::app()->params['rondasxdia'] . ' veces el día de hoy, vuelve mañana para que sigas acumulando puntos.');
+					$this->redirect('puntajes');
+					Yii::app()->end();
+				}
+			}elseif($this->_jugador_id == 117 && $n_rondasdia >= 3)
 			{
 				Yii::app()->user->setFlash('error', "Ya has jugado " . Yii::app()->params['rondasxdia'] . ' veces el día de hoy, vuelve mañana para que sigas acumulando puntos.');
 				$this->redirect('puntajes');
 				Yii::app()->end();
 			}
-
 
 			//Verifico el nivel para actualizar el tiempo de cada pregunta
 
