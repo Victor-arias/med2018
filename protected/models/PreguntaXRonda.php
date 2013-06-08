@@ -70,6 +70,7 @@ class PreguntaXRonda extends CActiveRecord
 			'id' => 'ID',
 			'ronda_id' => 'Ronda',
 			'pregunta_id' => 'Pregunta',
+			'estado' => 'Estado',
 		);
 	}
 
@@ -87,6 +88,7 @@ class PreguntaXRonda extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('ronda_id',$this->ronda_id);
 		$criteria->compare('pregunta_id',$this->pregunta_id);
+		$criteria->compare('estado',$this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

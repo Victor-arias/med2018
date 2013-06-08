@@ -318,14 +318,13 @@ class JugarController extends Controller
 			$rondasdia = Ronda::model()->getRondasDia( $this->_jugador_id );
 			$n_rondasdia = count($rondasdia);
 
-			
+		
 			if( $n_rondasdia >= Yii::app()->params['rondasxdia'] )
 			{
 				Yii::app()->user->setFlash('error', "Ya has jugado " . Yii::app()->params['rondasxdia'] . ' veces el día de hoy, vuelve mañana para que sigas acumulando puntos.');
 				$this->redirect('puntajes');
 				Yii::app()->end();
 			}
-			
 
 			//Verifico el nivel para actualizar el tiempo de cada pregunta
 

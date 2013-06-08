@@ -7,7 +7,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="telemedellin.tv">
 
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=1024">
 
 	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css">-->
 
