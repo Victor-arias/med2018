@@ -9,7 +9,7 @@ class JugarController extends Controller
 	private $_preguntan = 0;
 	private $_preguntaid= 0;
 	private $_nivel  	= 0;
-	private $_tiempo 	= 10;
+	private $_tiempo 	= 25;
 	private $_puntosr 	= 0;
 	private $_puntost 	= 0;
 	private $_situacion = 0;
@@ -129,9 +129,18 @@ class JugarController extends Controller
 		    Yii::app()->session['preguntan'] = $this->_preguntan = ($this->_preguntan + 1); 
 		    
 		}
+
+		
+
+
 		Yii::app()->session['preguntaid']= $this->_preguntaid= $resultado['pregunta']->id;
 		$resultado = array_merge( $resultado, array('pn' => $this->_preguntan, 't' => $this->_tiempo, 'a' => $this->_ayudas) );
-
+		//Agregar la pregunta a pregunta_x_ronda
+    	$pxr = new PreguntaXRonda;
+    	$pxr->ronda_id 		= $this->_ronda;
+    	$pxr->pregunta_id 	= $this->_preguntaid;
+    	$pxr->estado 		= 0;
+    	$pxr->save();
 		header('Content-Type: application/json; charset="UTF-8"');
 		echo CJSON::encode( $resultado );
 	    Yii::app()->end();
@@ -158,6 +167,18 @@ class JugarController extends Controller
 	{
 		$this->verificar_sesion();
 		$this->_situacion = 7;//7. Tiempo
+		$nivel = Nivel::model()->findByPk($this->_nivel);
+		$ronda = Ronda::model()->findByPk($this->_ronda);
+	    $puntosr = $ronda->puntos;
+
+    	$a = array(
+				'tiempo' 	=> ( $ronda->tiempo + $nivel->tiempo ), 
+				'preguntas' => $this->_preguntan, 
+				'nivel' 	=> $this->_nivel, 
+				'puntos' 	=> $puntosr
+			);
+	    	    	
+	    $ronda->updateByPk($this->_ronda, $a);
 		header('Content-Type: application/json; charset="UTF-8"');
 	    echo CJSON::encode( array('s' => $this->_situacion,
 								'n' => $this->_nivel,
@@ -178,6 +199,9 @@ class JugarController extends Controller
 		$tiempo 	= $_POST['t'];
 	    
 	    $r = Respuesta::model()->findByPk($respuesta);
+	    //Agrego la pregunta al array para no repetirla esta ronda
+    	$this->_preguntas[] = $this->_preguntaid;
+    	Yii::app()->session['preguntas'] = $this->_preguntas;
 	    
 	    if($r->es_correcta)
 	    {
@@ -186,7 +210,8 @@ class JugarController extends Controller
 	    	$ronda = Ronda::model()->findByPk($this->_ronda);
 
 	    	$puntosr = ($ronda->puntos + $nivel->puntos);
-
+	    	
+	    		
 	    	$a = array(
 					'tiempo' 	=> ($ronda->tiempo + ($nivel->tiempo - $tiempo) ), 
 					'preguntas' => $this->_preguntan, 
@@ -197,14 +222,11 @@ class JugarController extends Controller
 	    	$ronda->updateByPk($this->_ronda, $a);
 
 	    	//Agregar la pregunta a pregunta_x_ronda
-	    	$pxr = new PreguntaXRonda;
-	    	$pxr->ronda_id 		= $this->_ronda;
-	    	$pxr->pregunta_id 	= $this->_preguntaid;
-	    	$pxr->save();
+	    	$pxr = PreguntaXRonda::model()->findByAttributes(array('ronda_id' => $this->_ronda, 'pregunta_id' => $this->_preguntaid));
+	    	$pxr->estado 		= 1;
+	    	$pxr->update();
 
-	    	//Agrego la pregunta al array para no repetirla esta ronda
-	    	$this->_preguntas[] = $this->_preguntaid;
-	    	Yii::app()->session['preguntas'] = $this->_preguntas;
+	    	
 
 	    	Yii::app()->session['preguntaid'] 	= $this->_preguntaid = 0;
 	    	Yii::app()->session['puntosr'] 		= $this->_puntosr 	 = $puntosr;
@@ -235,6 +257,19 @@ class JugarController extends Controller
 	    else
 	    {
 	    	$situacion = 4;//4. Respuesta mala
+	    	$nivel = Nivel::model()->findByPk($this->_nivel);
+			$ronda = Ronda::model()->findByPk($this->_ronda);
+	    	$puntosr = $ronda->puntos;
+	    	if($tiempo < 0)
+	    		$tiempo = 0;
+	    	$a = array(
+					'tiempo' 	=> ($ronda->tiempo + ($nivel->tiempo - $tiempo) ), 
+					'preguntas' => $this->_preguntan, 
+					'nivel' 	=> $this->_nivel, 
+					'puntos' 	=> $puntosr
+				);
+	    	    	
+	    	$ronda->updateByPk($this->_ronda, $a);
 	    }
 
 	    Yii::app()->session['situacion'] = $this->_situacion = $situacion;
@@ -282,13 +317,15 @@ class JugarController extends Controller
 			//3. Verifico el  número de rondas que ha jugado hoy para que no juegue más de la cuenta
 			$rondasdia = Ronda::model()->getRondasDia( $this->_jugador_id );
 			$n_rondasdia = count($rondasdia);
-			if($n_rondasdia >= Yii::app()->params['rondasxdia'])
+
+			
+			if( $n_rondasdia >= Yii::app()->params['rondasxdia'] )
 			{
 				Yii::app()->user->setFlash('error', "Ya has jugado " . Yii::app()->params['rondasxdia'] . ' veces el día de hoy, vuelve mañana para que sigas acumulando puntos.');
 				$this->redirect('puntajes');
 				Yii::app()->end();
 			}
-
+			
 
 			//Verifico el nivel para actualizar el tiempo de cada pregunta
 
@@ -331,10 +368,9 @@ class JugarController extends Controller
 		{
 			Yii::app()->session['ronda'] 		= $this->_ronda 	= 0;
 			Yii::app()->session['preguntan']	= $this->_preguntan = 0;
-			Yii::app()->session['preguntan']	= $this->_preguntan = 0;
 			Yii::app()->session['preguntaid']	= $this->_preguntaid= 0;
 			Yii::app()->session['nivel'] 		= $this->_nivel 	= 0;
-			Yii::app()->session['tiempo'] 		= $this->_tiempo 	= 10;
+			Yii::app()->session['tiempo'] 		= $this->_tiempo 	= 25;
 			Yii::app()->session['puntosr'] 		= $this->_puntosr 	= 0;
 			Yii::app()->session['puntost'] 		= $this->_puntost 	= 0;
 			Yii::app()->session['situacion']	= $this->_situacion = 0;
