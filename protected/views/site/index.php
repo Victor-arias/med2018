@@ -14,11 +14,11 @@ $this->pageTitle = Yii::app()->name;
 	</div>
 	<div id="right-content">
 		<ul>
+			<!--<li>
+				<?php //echo CHtml::link('<span class="resaltado">Regístrate</span> y empieza a jugar', array('registro'), array('class' => 'registrate') )?>
+			</li>-->
 			<li>
-				<?php echo CHtml::link('<span class="resaltado">Regístrate</span> y empieza a jugar', array('registro'), array('class' => 'registrate') )?>
-			</li>
-			<li>
-				<?php echo CHtml::link('Si ya estás registrado <span class="resaltado">¡Sigue jugando!</span>', array('/jugar'), array('class' => 'juega'))?>
+				<?php echo CHtml::link('¡Estamos verificando <span class="resaltado">los resultados!</span>', array('/puntajes'), array('class' => 'juega'))?>
 			</li>
 		</ul>
 	</div>

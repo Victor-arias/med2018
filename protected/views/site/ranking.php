@@ -32,6 +32,6 @@ $this->pageTitle = 'Ranking - '.Yii::app()->name;
 		</ul>
 	</div>
 </div>
-<div id="btn-jugar">
-	<?php echo CHtml::link( '¿Quieres aparecer en estos puntajes? ¡Participa!', array('/jugar'), array('class' => 'btn-jugar' ) ); ?>
-</div>
+<!--<div id="btn-jugar">
+	<?php //echo CHtml::link( '¿Quieres aparecer en estos puntajes? ¡Participa!', array('/jugar'), array('class' => 'btn-jugar' ) ); ?>
+</div>-->

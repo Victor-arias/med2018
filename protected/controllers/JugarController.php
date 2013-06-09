@@ -52,7 +52,7 @@ class JugarController extends Controller
 		
 
 		header('Content-Type: application/json; charset="UTF-8"');
-	    echo CJSON::encode( array('ayudas' => $this->_ayudas) );
+	    //echo CJSON::encode( array('ayudas' => $this->_ayudas) );
 	    //Yii::app()->end();
 		/*echo '<pre>';
 		print_r($ayudas);
@@ -108,6 +108,8 @@ class JugarController extends Controller
 
 	public function actionJugar()
 	{
+		
+
 		$this->verificar_sesion();
 
 		$this->render('jugar');
