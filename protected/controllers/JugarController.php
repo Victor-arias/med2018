@@ -108,7 +108,8 @@ class JugarController extends Controller
 
 	public function actionJugar()
 	{
-		
+		Yii::app()->user->setFlash('error', "Estamos revisando los resultados");
+		$this->redirect('puntajes');
 
 		$this->verificar_sesion();
 

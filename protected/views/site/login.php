@@ -46,5 +46,5 @@ $this->pageTitle= 'Iniciar sesión - ' .Yii::app()->name;
 <?php $this->endWidget(); ?>
 </div><!-- form -->
 <div id="right-content">
-	<?php echo CHtml::link('<span class="resaltado">Regístrate</span> y empieza a jugar', array('registro'), array('class' => 'registrate') )?>
+	<?php //echo CHtml::link('<span class="resaltado">Regístrate</span> y empieza a jugar', array('registro'), array('class' => 'registrate') )?>
 </div>

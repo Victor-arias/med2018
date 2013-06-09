@@ -80,6 +80,8 @@ class SiteController extends Controller
 
 	public function actionRegistro()
 	{
+		Yii::app()->user->setFlash('error', "Estamos revisando los resultados");
+		$this->redirect('puntajes');
 		$usuario = new Usuario;
 		$jugador = new Jugador;
 
