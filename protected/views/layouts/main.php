@@ -43,7 +43,7 @@
 		<div id="usermenu">
 			<?php $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
-					//array('label'=>'Comienza a jugar', 'url'=>array('/jugar'), 'linkOptions' => array('class' => 'perfil')),
+					array('label'=>'Ingresa a tu perfil', 'url'=>array('/iniciar-sesion'), 'linkOptions' => array('class' => 'perfil'), 'visible'=>Yii::app()->user->isGuest),
 					array('label'=>'Perfil', 'url'=>array('/perfil'), 'linkOptions' => array('class' => 'sesion'), 'visible'=>!Yii::app()->user->isGuest),
 					array('label'=>'Salir', 'url'=>array('/cerrar-sesion'), 'linkOptions' => array('class' => 'sesion'), 'visible'=>!Yii::app()->user->isGuest),
 				),
