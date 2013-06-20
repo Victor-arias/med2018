@@ -238,6 +238,30 @@ a.juega {
 a.juega:hover {
 	background-position: 0 -227px;
 }
+
+.nina {
+	background-image: url("../images/laura.jpg");
+	background-repeat: no-repeat;
+	width: 340px;
+	height: 212px;
+	float: right;
+	padding: 15px 5px 0 20px;
+	margin-top: 55px;
+	
+}
+
+.nino {
+	background-image: url("../images/juan.jpg");
+	background-repeat: no-repeat;
+	width: 340px;
+	height: 212px;
+	float: right;
+	padding: 5px 5px 0 20px;
+	margin-top: 10px;
+	
+}
+
+
 .resaltado {
 	font-size: 32px;
 	display: block;
